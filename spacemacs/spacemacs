@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     sql
+     yaml
      nginx
      html
      ;; ----------------------------------------------------------------
@@ -136,7 +138,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -313,6 +315,29 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; recursively find .org files in provided directory
+  ;; modified from an Emacs Lisp Intro example
+  (defun sa-find-org-file-recursively (&optional directory filext)
+    "Return .org and .org_archive files recursively from DIRECTORY.
+  If FILEXT is provided, return files with extension FILEXT instead."
+    (interactive "DDirectory: ")
+    (let* (org-file-list
+    (case-fold-search t)	      ; filesystems are case sensitive
+    (file-name-regex "^[^.#].*") ; exclude dot, autosave, and backup files
+    (filext (or filext "org$\\\|org_archive"))
+    (fileregex (format "%s\\.\\(%s$\\)" file-name-regex filext))
+    (cur-dir-list (directory-files directory t file-name-regex)))
+      ;; loop over directory listing
+      (dolist (file-or-dir cur-dir-list org-file-list) ; returns org-file-list
+        (cond
+        ((file-regular-p file-or-dir) ; regular files
+    (if (string-match fileregex file-or-dir) ; org files
+        (add-to-list 'org-file-list file-or-dir)))
+        ((file-directory-p file-or-dir)
+    (dolist (org-file (sa-find-org-file-recursively file-or-dir filext)
+          org-file-list) ; add files found to result
+      (add-to-list 'org-file-list org-file)))))))
+
   ;; Additional web-mode configuration
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
@@ -322,6 +347,17 @@ you should place your code here."
   (add-hook 'python-mode-hook
             (lambda () (modify-syntax-entry ?_ "w")))
 
+  ;; Remap expanding of snippet
+  (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
+
+  ;; Set default column view headings: Task Total-Time Time-Stamp
+  (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+
+  ;; always follow the symlink (and edit the "actual" file directly)
+  (setq vc-follow-symlinks t)
+
+  (setq org-agenda-files
+        (append (sa-find-org-file-recursively "~/Google Drive File Stream/My Drive/" "org")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
