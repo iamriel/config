@@ -1,7 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/ffmpeg@2.8/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/light/.oh-my-zsh
@@ -60,9 +62,10 @@ ZSH_THEME=""
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
+autoload -U compinit && compinit
 
 autoload -U promptinit; promptinit
 prompt pure
@@ -96,10 +99,10 @@ prompt pure
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+source <(cat ~/.oh-my-zsh/custom/alias/*)
+
 # Virtualenvwrapper Configuration
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
-
-export PATH="/usr/local/opt/ffmpeg@2.8/bin:$PATH"
 
