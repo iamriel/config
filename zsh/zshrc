@@ -106,3 +106,5 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
 
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
