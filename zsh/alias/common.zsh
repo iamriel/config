@@ -8,3 +8,5 @@ alias inov_api="workon inov; cd ~/Projects/inovation/web_api;"
 alias inov_web="cd ~/Projects/inovation/web_app;"
 alias inov_infra="workon inov_infra; cd ~/Projects/inovation/infrastructure;"
 
+alias docker_stop_ps="docker stop $(docker ps -a -q)"
+
