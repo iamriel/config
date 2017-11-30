@@ -22,8 +22,10 @@ If FILEXT is provided, return files with extension FILEXT instead."
     (add-to-list 'org-file-list org-file)))))))
 
 ;; Docs http://blog.hourglasslab.com/2016/10/19/how%20do%20i%20organize%20my%20tasks%20and%20notes/
-(setq org-agenda-files
-      (append (sa-find-org-file-recursively "~/Google Drive File Stream/My Drive/" "org")))
+;; (setq org-agenda-files
+;;       (append (sa-find-org-file-recursively "~/Google Drive File Stream/My Drive/org/" "agenda")))
+
+(setq org-agenda-files '("~/Google Drive File Stream/My Drive/org/agenda/"))
 
 ;; Making org level headers the same size
 (custom-set-faces
@@ -73,7 +75,7 @@ If FILEXT is provided, return files with extension FILEXT instead."
 
 ;; Todo list with schedule and deadline http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/
 (setq org-capture-templates
-      '(("t" "todo" entry (file+headline "~/Google Drive File Stream/My Drive/org/gtd/gtd.org" "Tasks")
+      '(("t" "todo" entry (file+headline "~/Google Drive File Stream/My Drive/org/agenda/gtd.org" "Tasks")
           "* TODO [#C] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n")))
 
 (setq org-refile-targets '((nil :maxlevel . 9)

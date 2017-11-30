@@ -330,6 +330,8 @@ you should place your code here."
             (lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'yaml-mode-hook
             (lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'web-mode-hook
+            (lambda () (modify-syntax-entry ?_ "w")))
 
   ;; Remap expanding of snippet
   (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
@@ -339,6 +341,9 @@ you should place your code here."
 
   ;; always follow the symlink (and edit the "actual" file directly)
   (setq vc-follow-symlinks t)
+
+  ;; Follow link on enter
+  (setq org-return-follows-link t)
 
   (load "~/Projects/config/spacemacs/agenda.el")
 

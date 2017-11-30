@@ -4,6 +4,12 @@ export PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ffmpeg@2.8/bin:$PATH"
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+export PATH="/usr/local/opt/apr/bin:$PATH"
+export PATH="/usr/local/opt/apr-util/bin:$PATH"
+# export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/light/.oh-my-zsh
@@ -106,5 +112,3 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
 
-export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
