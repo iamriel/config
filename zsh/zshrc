@@ -1,3 +1,7 @@
+if [[ -v ZSH_PROF ]]; then
+  zmodload zsh/zprof
+fi
+
 # If you come from bash you might have to change your $PATH.
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH=/usr/local/bin:$HOME/bin:$PATH
@@ -8,6 +12,7 @@ export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 export PATH="/usr/local/opt/apr/bin:$PATH"
 export PATH="/usr/local/opt/apr-util/bin:$PATH"
+export PATH="/Library/Frameworks/Mono.framework/Versions/Current/Commands:$PATH"
 # export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
 
@@ -68,7 +73,9 @@ ZSH_THEME=""
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-completions)
+plugins=(git zsh-syntax-highlighting zsh-completions kubectl kops vi-mode)
+
+fpath=(~/.zsh/completion $fpath)
 
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
@@ -110,5 +117,4 @@ source <(cat ~/.oh-my-zsh/custom/alias/*)
 # Virtualenvwrapper Configuration
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
-source /usr/local/bin/virtualenvwrapper.sh
-
+source /usr/local/bin/virtualenvwrapper_lazy.sh
