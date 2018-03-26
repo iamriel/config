@@ -1,3 +1,5 @@
+alias e='emacsclient --no-wait'
+
 alias migrate="./manage.py migrate"
 alias runserver="./manage.py runserver"
 alias shell="./manage.py shell"
