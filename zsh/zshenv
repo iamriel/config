@@ -1,0 +1,52 @@
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/light/.oh-my-zsh
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+export LANG='en_US.UTF-8'
+export LC_CTYPE='UTF-8'
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export EDITOR='vim'
+
+# Paths
+typeset -gU cdpath fpath mailpath manpath path
+typeset -gUT INFOPATH infopath
+
+# Set the list of directories that info searches for manuals.
+infopath=(
+  /usr/local/share/info
+  /usr/share/info
+  $infopath
+)
+
+# Set the list of directories that man searches for manuals.
+manpath=(
+  /usr/local/share/man
+  /usr/share/man
+  $manpath
+)
+
+for path_file in /etc/manpaths.d/*(.N); do
+  manpath+=($(<$path_file))
+done
+unset path_file
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  /usr/local/opt/openssl/bin
+  /usr/local/{bin,sbin}
+  /usr/{bin,sbin}
+  /{bin,sbin}
+  /usr/local/opt/python/libexec/bin
+  /usr/local/opt/ffmpeg@2.8/bin
+  /usr/local/opt/php56/bin
+  /usr/local/opt/gnu-getopt/bin
+  /usr/local/opt/apr/bin
+  /usr/local/opt/apr-util/bin
+  /Library/Frameworks/Mono.framework/Versions/Current/Commands
+  $path
+)
+
+for path_file in /etc/paths.d/*(.N); do
+  path+=($(<$path_file))
+done
+unset path_file
