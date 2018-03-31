@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/light/.oh-my-zsh
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
-export LANG='en_US.UTF-8'
-export LC_CTYPE='UTF-8'
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export EDITOR='vim'

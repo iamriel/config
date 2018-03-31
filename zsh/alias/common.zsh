@@ -28,3 +28,5 @@ alias pcat='pygmentize -f terminal256 -O style=monokai -g'
 # Docker alias
 alias dcup='docker-compose up'
 alias dcdown='docker-compose down'
+
+alias getwords='python3 ~/Projects/utils/getwords.py'
