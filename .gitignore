@@ -1,1 +1,3 @@
 .DS_STORE
+.user-config.el
+.user-init.el
