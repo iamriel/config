@@ -31,13 +31,19 @@
   To add configuration options before Spacemacs loads, insert the following kind
   of src block in your spacemacs.org file
 
-  #+BEGIN_SRC emacs-lisp :tangle .user-init.el
+  #+BEGIN_SRC org :tangle no
+    ,#+BEGIN_SRC emacs-lisp :tangle .user-init.el
+
+    ,#+END_SRC
   #+END_SRC
 
   Alternatively, if the block should be loaded after Spacemacs loads, insert the
   following test block
 
-  #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+  #+BEGIN_SRC org :tangle no
+    ,#+BEGIN_SRC emacs-lisp :tangle .user-config.el
+
+    ,#+END_SRC
   #+END_SRC
 
 * Helper Functions
