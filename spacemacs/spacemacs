@@ -461,12 +461,18 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq theming-modifications '(
-                                (apropospriate-dark
-                                 (mode-line :box (:line-width 1 :color "#282828" :style nil))
-                                 (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
-                                 ))
-        )
+
+  ;; tangle without actually loading org
+  (let ((src (concat default-directory ".spacemacs.org"))
+        (ui (concat default-directory ".user-init.el"))
+        (uc (concat default-directory ".user-config.el")))
+    (when (or (file-newer-than-file-p src ui) (file-newer-than-file-p src uc))
+      (call-process
+       (concat invocation-directory invocation-name)
+       nil nil t
+       "-q" "--batch" "--eval" "(require 'ob-tangle)"
+       "--eval" (format "(org-babel-tangle-file \"%s\")" src)))
+    (load-file ui))
   )
 
 (defun dotspacemacs/user-config ()
@@ -476,8 +482,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (load "~/Projects/config/spacemacs/user-config.el")
-
+  (load-file (concat default-directory ".user-config.el"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

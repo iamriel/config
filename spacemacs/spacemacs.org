@@ -1,0 +1,301 @@
+#+TITLE: Spacemacs User Configuration
+#+DATE: <2018-04-05 Thu>
+#+AUTHOR: Rieljun Liguid
+#+EMAIL: me@iamriel.com
+
+* Introduction
+  This is a tangled user-init and user-config file for spacemacs. Place the
+  following code in your =~/.spacemacs.d/init.el= file =~/.spacemacs=.
+
+** init.el / .spacemacs
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (defun dotspacemacs/user-init ()
+      ;; tangle without actually loading org
+      (let ((src (concat default-directory ".spacemacs.org"))
+            (ui (concat default-directory ".user-init.el"))
+            (uc (concat default-directory ".user-config.el")))
+        (when (or (file-newer-than-file-p src ui) (file-newer-than-file-p src uc))
+          (call-process
+          (concat invocation-directory invocation-name)
+          nil nil t
+          "-q" "--batch" "--eval" "(require 'ob-tangle)"
+          "--eval" (format "(org-babel-tangle-file \"%s\")" src)))
+        (load-file ui)))
+
+    (defun dotspacemacs/user-config ()
+      (load-file (concat default-directory ".user-config.el")))
+  #+END_SRC
+
+** spacemacs.org
+  To add configuration options before Spacemacs loads, insert the following kind
+  of src block in your spacemacs.org file
+
+  #+BEGIN_SRC emacs-lisp :tangle .user-init.el
+  #+END_SRC
+
+  Alternatively, if the block should be loaded after Spacemacs loads, insert the
+  following test block
+
+  #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+  #+END_SRC
+
+* Helper Functions
+
+** Yasnippet creation
+
+  To help with creation of your text blocks, there are two snippets defined in the
+  local snippet directory =~/.spacemacs.d/snippets/org-mode/= folder.
+
+  To tangle to the =user-init= file, type =ui=, alternatively =uc= to tangle the =user-config= file.
+
+** Find this file
+   Create binding to spacemacs.org file
+
+  #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    (defun spacemacs/find-config-file ()
+      (interactive)
+      (find-file (concat default-directory ".spacemacs.org")))
+
+    (spacemacs/set-leader-keys "fec" 'spacemacs/find-config-file)
+  #+END_SRC
+
+* user-init section
+  
+** Theming Modification
+   #+BEGIN_SRC emacs-lisp :tangle .user-init.el
+     (setq theming-modifications
+           '(
+             (apropospriate-dark
+              (mode-line :box (:line-width 1 :color "#282828" :style nil))
+              (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
+              )
+             ))
+   #+END_SRC
+   
+* user-config section
+  This is where you place your configuration for user-config
+
+** Org mode configuration and hooks
+   Feed babel code block result to a separate buffer
+   
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (defun my-babel-to-buffer ()
+       (interactive)
+       (org-open-at-point)
+       (org-babel-remove-result)
+       )
+
+     (defun my-org-mode-config ()
+       (local-set-key (kbd "C-c n") 'my-babel-to-buffer)
+       ;; Follow link on enter
+       (setq org-return-follows-link t)
+       )
+     (add-hook 'org-mode-hook 'my-org-mode-config)
+   #+END_SRC
+  
+** Org agenda configuration
+*** Agenda files and templates
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (setq org-agenda-files '("~/Google Drive File Stream/My Drive/org/agenda/"))
+ 
+      ;; Todo list with schedule and deadline
+      ;; http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/
+      (setq org-capture-templates
+            '(("t" "todo" entry (file+headline "~/Google Drive File Stream/My Drive/org/agenda/gtd.org" "Tasks")
+               "* TODO [#C] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n")))
+ 
+      (setq org-outline-path-complete-in-steps nil)
+      (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+    #+END_SRC
+   
+*** Setting up TODO workflow
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (setq org-todo-keywords
+            '((sequence "TODO(t)" "IN PROGRESS(i)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)")
+              (sequence "CRASH(c)" "BUG(b)" "REQUEST(r)" "TEST(e)" "|" "FIXED(f)")))
+ 
+      (setq org-todo-keyword-faces
+            '(("WAIT" . "white")
+              ("CRASH" . "red")
+              ("BUG" . "red")
+              ("SUBTREE" . "grey")
+              ("TEST" . "turquoise1")
+              ))
+    #+END_SRC
+
+*** Add custom commands
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (setq org-agenda-custom-commands
+            '(
+              ("p" . "Screening tasks (no effect, need to be fixed)")
+              ("pa" "Urgent" tags "+PRIORITY=\"A\"")
+              ("pb" "High" tags "+PRIORITY=\"B\"")
+              ("pc" "Medium" tags "+PRIORITY=\"C\"")
+              ("pd" "Normal" tags "+PRIORITY=\"D\"")
+              ("pe" "Low" tags "+PRIORITY=\"E\"")
+              ))
+    #+END_SRC
+
+*** Faces configuration
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (setq org-priority-faces
+            '((?A . (:foreground "red1" :weight 'bold))
+              (?B . (:foreground "VioletRed1"))
+              (?C . (:foreground "DeepSkyBlue3"))
+              (?D . (:foreground "DeepSkyBlue4"))
+              (?E . (:foreground "gray40"))))
+
+      (custom-set-faces
+       '(org-agenda-done ((t (:foreground "#86dc2f" :height 1.0)))))
+
+      (custom-set-faces
+       '(org-scheduled-today ((t (:foreground "DodgerBlue2" :height 1.0)))))
+    #+END_SRC
+   
+*** Extra Options
+    
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (setq org-agenda-remove-tags t)
+      ;; Tag completion through out all agenda files
+      (setq org-complete-tags-always-offer-all-agenda-tags t)
+
+      ;;open agenda in current window
+      (setq org-agenda-window-setup (quote current-window))
+
+      ;;warn me of any deadlines in next 7 days
+      (setq org-deadline-warning-days 7)
+
+      ;;show me tasks scheduled or due in next fortnight
+      (setq org-agenda-span (quote fortnight))
+
+      ;;don't show tasks as scheduled if they are already shown as a deadline
+      (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+
+      ;;don't give a warning colour to tasks with impending deadlines
+      ;;if they are scheduled to be done
+      (setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
+
+      ;;don't show tasks that are scheduled or have deadlines in the
+      ;;normal todo list
+      (setq org-agenda-todo-ignore-deadlines (quote all))
+      (setq org-agenda-todo-ignore-scheduled (quote all))
+
+      ;;sort tasks in order of when they are due and then by priority
+      (setq org-agenda-sorting-strategy
+        (quote
+        ((agenda deadline-up priority-down)
+          (todo priority-down category-keep)
+          (tags priority-down category-keep)
+          (search category-keep))))
+
+      (setq org-highest-priority ?A)
+      (setq org-lowest-priority ?E)
+      (setq org-default-priority ?C)
+
+      (setq org-agenda-prefix-format '((agenda  . "%-10:T% s%?-2t") ; (agenda . " %s %-12t ")
+                                       (timeline . "%-9:T%?-2t% s")
+                                       (todo . "%i%-8:T")
+                                       (tags . "%i%-8:T")
+                                       (search . "%i%-8:T")))
+    #+END_SRC
+
+** Web mode configuration and hooks
+   
+   Enable web-mode for the following files and add default offset
+
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+     (setq
+     css-indent-offset 2
+     web-mode-markup-indent-offset 2
+     web-mode-css-indent-offset 2
+     web-mode-code-indent-offset 2
+     web-mode-attr-indent-offset 2)
+   #+END_SRC
+   
+   Fix web-mode expand region
+   
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (defun er/fix-web-mode-expansions ()
+       (make-variable-buffer-local 'er/try-expand-list)
+       (setq er/try-expand-list (append
+                                 er/try-expand-list
+                                 '(web-mode-mark-and-expand)
+                                 )))
+     (add-hook 'web-mode-hook 'er/fix-web-mode-expansions)
+   #+END_SRC
+   
+   Django-specific settings for web-mode
+   
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (defun web/django ()
+       (if (projectile-project-p)
+           (when (file-exists-p (concat (projectile-project-root) "manage.py"))
+             (web-mode-set-engine "django")
+             (setq web-mode-code-indent-offset 4
+                   web-mode-markup-indent-offset 4)
+             )
+         )
+       )
+     (add-hook 'web-mode-hook 'web/django)
+   #+END_SRC
+
+** Generic Hooks
+   
+   Make underscore part of the word
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (add-hook 'python-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'jinja2-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'yaml-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'web-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'rjsx-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+   #+END_SRC
+   
+   Make default offset for js2-mode
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2)))
+   #+END_SRC
+
+*** Rjsx mode
+    
+    Enable flycheck and emmet-mode in rjsx-mode
+    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+      (add-hook 'rjsx-mode-hook
+                (lambda ()
+                  (flycheck-mode 1)
+                  (emmet-mode 1)
+                  ))
+    #+END_SRC
+
+** Variable settings and overrides
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     ;; Set default column view headings: Task Total-Time Time-Stamp
+     (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+
+     ;; always follow the symlink (and edit the "actual" file directly)
+     (setq vc-follow-symlinks t)
+
+     (setq projectile-enable-caching t)
+   #+END_SRC
+   
+** Key bindings
+   
+   Evil key overrides
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     ;; Remap expanding of snippet
+     (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
+   #+END_SRC
+   
+   Normal key overrides (not related to evil-mode)
+   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+     ;; rebind tab to do persistent action
+     (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+   #+END_SRC
