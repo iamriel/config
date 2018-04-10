@@ -103,14 +103,16 @@
 ** Org agenda configuration
 *** Agenda files and templates
     #+BEGIN_SRC emacs-lisp :tangle .user-config.el
-      (setq org-agenda-files '("~/Google Drive File Stream/My Drive/org/agenda/"))
- 
+      (setq org-agenda-files '("~/Org Files/agenda/"))
+
       ;; Todo list with schedule and deadline
       ;; http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/
       (setq org-capture-templates
-            '(("t" "todo" entry (file+headline "~/Google Drive File Stream/My Drive/org/agenda/gtd.org" "Tasks")
+            '(("t" "todo" entry (file+headline
+                                 "~/Org Files/agenda/gtd.org"
+                                 "Tasks")
                "* TODO [#C] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n")))
- 
+
       (setq org-outline-path-complete-in-steps nil)
       (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     #+END_SRC
