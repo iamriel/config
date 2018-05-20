@@ -32,7 +32,7 @@
   of src block in your spacemacs.org file
 
   #+BEGIN_SRC org :tangle no
-    ,#+BEGIN_SRC emacs-lisp :tangle .user-init.el
+    ,#+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
 
     ,#+END_SRC
   #+END_SRC
@@ -41,7 +41,7 @@
   following test block
 
   #+BEGIN_SRC org :tangle no
-    ,#+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    ,#+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
 
     ,#+END_SRC
   #+END_SRC
@@ -58,7 +58,7 @@
 ** Find this file
    Create binding to spacemacs.org file
 
-  #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+  #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
     (defun spacemacs/find-config-file ()
       (interactive)
       (find-file (concat default-directory ".spacemacs.org")))
@@ -69,7 +69,7 @@
 * user-init section
   
 ** Theming Modification
-   #+BEGIN_SRC emacs-lisp :tangle .user-init.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
      (setq theming-modifications
            '(
              (apropospriate-dark
@@ -85,7 +85,7 @@
 ** Org mode configuration and hooks
    Feed babel code block result to a separate buffer
    
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (defun my-babel-to-buffer ()
        (interactive)
        (org-open-at-point)
@@ -102,7 +102,7 @@
   
 ** Org agenda configuration
 *** Agenda files and templates
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq org-agenda-files '("~/Org Files/agenda/"))
 
       ;; Todo list with schedule and deadline
@@ -118,7 +118,7 @@
     #+END_SRC
    
 *** Setting up TODO workflow
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq org-todo-keywords
             '((sequence "TODO(t)" "IN PROGRESS(i)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)")
               (sequence "CRASH(c)" "BUG(b)" "REQUEST(r)" "TEST(e)" "|" "FIXED(f)")))
@@ -133,7 +133,7 @@
     #+END_SRC
 
 *** Add custom commands
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq org-agenda-custom-commands
             '(
               ("p" . "Screening tasks (no effect, need to be fixed)")
@@ -146,7 +146,7 @@
     #+END_SRC
 
 *** Faces configuration
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq org-priority-faces
             '((?A . (:foreground "red1" :weight 'bold))
               (?B . (:foreground "VioletRed1"))
@@ -163,7 +163,7 @@
    
 *** Extra Options
     
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq org-agenda-remove-tags t)
       ;; Tag completion through out all agenda files
       (setq org-complete-tags-always-offer-all-agenda-tags t)
@@ -212,7 +212,7 @@
    
    Enable web-mode for the following files and add default offset
 
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
      (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 
@@ -226,7 +226,7 @@
    
    Fix web-mode expand region
    
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (defun er/fix-web-mode-expansions ()
        (make-variable-buffer-local 'er/try-expand-list)
        (setq er/try-expand-list (append
@@ -238,7 +238,7 @@
    
    Django-specific settings for web-mode
    
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (defun web/django ()
        (if (projectile-project-p)
            (when (file-exists-p (concat (projectile-project-root) "manage.py"))
@@ -254,7 +254,7 @@
 ** Generic Hooks
    
    Make underscore part of the word
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (add-hook 'python-mode-hook
                (lambda () (modify-syntax-entry ?_ "w")))
      (add-hook 'jinja2-mode-hook
@@ -267,15 +267,19 @@
                (lambda () (modify-syntax-entry ?_ "w")))
    #+END_SRC
    
-   Make default offset for js2-mode
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
-     (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2)))
+   Make default offset for js2-mode and disable errors and warnings
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (add-hook 'js2-mode-hook (lambda ()
+                                (setq js2-basic-offset 2)
+                                (setq js2-mode-show-parse-errors nil)
+                                (setq js2-mode-show-strict-warnings nil)
+                                ))
    #+END_SRC
 
 *** Rjsx mode
     
     Enable flycheck and emmet-mode in rjsx-mode
-    #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (add-hook 'rjsx-mode-hook
                 (lambda ()
                   (flycheck-mode 1)
@@ -284,7 +288,7 @@
     #+END_SRC
 
 ** Variable settings and overrides
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; Set default column view headings: Task Total-Time Time-Stamp
      (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
@@ -297,13 +301,13 @@
 ** Key bindings
    
    Evil key overrides
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; Remap expanding of snippet
      (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
    #+END_SRC
    
    Normal key overrides (not related to evil-mode)
-   #+BEGIN_SRC emacs-lisp :tangle .user-config.el
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; rebind tab to do persistent action
      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
    #+END_SRC

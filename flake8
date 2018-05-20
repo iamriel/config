@@ -22,11 +22,11 @@ ignore =
     # H405: multi line docstring summary not separated with an empty line
     H405,
     # H501: Do not use self.__dict__ for string formatting
-    H501
+    H501,
     # E128: Continuation line under-indented for visual indent
-    E128
+    E128,
     # E124: Closing bracket does not match visual indentation
-    E124
+    E124,
     # E501: Line too long (82 > 79 characters)
     E501
 exclude =
