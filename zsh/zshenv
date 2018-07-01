@@ -42,6 +42,7 @@ path=(
   /usr/local/opt/apr/bin
   /usr/local/opt/apr-util/bin
   /Library/Frameworks/Mono.framework/Versions/Current/Commands
+  /Users/light/Library/Python/3.6/bin
   $path
 )
 

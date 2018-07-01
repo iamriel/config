@@ -216,6 +216,14 @@
                                        (search . "%i%-8:T")))
     #+END_SRC
 
+** atomic-chrome
+    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+      (setq
+       atomic-chrome-buffer-open-style 'frame
+       atomic-chrome-default-major-mode 'markdown-mode
+      )
+   #+END_SRC
+
 ** Web mode configuration and hooks
    
    Enable web-mode for the following files and add default offset
@@ -312,10 +320,4 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; Remap expanding of snippet
      (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
-   #+END_SRC
-   
-   Normal key overrides (not related to evil-mode)
-   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     ;; rebind tab to do persistent action
-     (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
    #+END_SRC
