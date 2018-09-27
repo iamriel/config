@@ -15,10 +15,20 @@ alias inov_infra="workon inov_infra; cd ~/Projects/inovation/infrastructure;"
 alias inov_celery="inov_api; celery -A workinovation worker -l info;"
 alias inov_celery_purge="inov_api; celery -A workinovation purge -f;"
 
+# Boundless aliases
+alias boundless_api="cd ~/Projects/sidney/boundless-django;"
+alias boundless_web="cd ~/Projects/sidney/boundless-frontend;"
+
+# Jens aliases
+alias metronom_api="cd ~/Projects/jens/metronom-pro-backend;"
 
 # Malita aliases
 alias malita_api="workon malita; cd ~/Projects/malita/profiling;"
 alias malita_web="cd ~/Projects/malita/profiling-vue;"
+
+# Doxa
+alias doxa_api="cd ~/Projects/infosoft/doxa/api;pipenv shell;"
+alias doxa_web="cd ~/Projects/infosoft/doxa/docsan_vue"
 
 alias docker_stop_ps="docker stop $(docker ps -a -q)"
 
@@ -30,3 +40,5 @@ alias dcup='docker-compose up'
 alias dcdown='docker-compose down'
 
 alias getwords='python3 ~/Projects/utils/getwords.py'
+
+alias reset_dns='sudo killall -HUP mDNSResponder; sleep 2;'

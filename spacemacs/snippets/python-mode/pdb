@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : pdb
+#key : pdb
+#contributor : Rieljun Liguid
+# --
+import pdb; pdb.set_trace();$0

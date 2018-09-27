@@ -5,6 +5,8 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export EDITOR='vim'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export SASS_PATH=/usr/local/bin/sass
+export GPG_TTY=$(tty)
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -43,6 +45,8 @@ path=(
   /usr/local/opt/apr-util/bin
   /Library/Frameworks/Mono.framework/Versions/Current/Commands
   /Users/light/Library/Python/3.6/bin
+  /usr/local/opt/gettext/bin
+  /usr/local/Cellar/node/9.4.0/lib/node_modules/nuxt/bin
   $path
 )
 
