@@ -316,6 +316,10 @@
                (lambda () (modify-syntax-entry ?_ "w")))
      (add-hook 'rjsx-mode-hook
                (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'web-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
+     (add-hook 'js2-mode-hook
+               (lambda () (modify-syntax-entry ?_ "w")))
    #+END_SRC
    
    Make default offset for js2-mode and disable errors and warnings
