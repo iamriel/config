@@ -41,7 +41,6 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      github
-     helm
      html
      javascript
      markdown
@@ -61,6 +60,8 @@ This function should only modify configuration layer settings."
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-complete-with-key-sequence (kbd "jk"))
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+     (helm :variables
+           helm-no-header t)
      (python :variables
              python-test-runner 'pytest)
      (restclient :variables
