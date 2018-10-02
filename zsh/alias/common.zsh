@@ -21,6 +21,7 @@ alias boundless_web="cd ~/Projects/sidney/boundless-frontend;"
 
 # Jens aliases
 alias metronom_api="cd ~/Projects/jens/metronom-pro-backend;"
+alias metronom_infra="cd ~/Projects/jens/metronom-pro-infrastructure;"
 
 # Malita aliases
 alias malita_api="workon malita; cd ~/Projects/malita/profiling;"
