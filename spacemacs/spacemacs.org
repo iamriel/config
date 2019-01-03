@@ -77,6 +77,8 @@
               (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
               )
              ))
+
+     (load-file "~/.emacs.d/private/blacken/blacken.el")
    #+END_SRC
    
 * user-config section
@@ -252,7 +254,6 @@
 ** atomic-chrome
     #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
       (setq
-       atomic-chrome-buffer-open-style 'frame
        atomic-chrome-default-major-mode 'markdown-mode
       )
    #+END_SRC
@@ -357,6 +358,8 @@
      (setq vc-follow-symlinks t)
 
      (setq projectile-enable-caching t)
+
+     (cancel-timer recentf-auto-save-timer)
    #+END_SRC
    
 ** Key bindings
@@ -365,4 +368,9 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; Remap expanding of snippet
      (evil-define-key 'insert global-map (kbd "C-y") 'yas-expand)
+
+     (spacemacs/set-leader-keys "mt" 'text-mode)
+     (spacemacs/set-leader-keys "mw" 'web-mode)
+
+     (spacemacs/set-leader-keys-for-major-mode 'python-mode "bb" 'blacken-buffer)
    #+END_SRC
