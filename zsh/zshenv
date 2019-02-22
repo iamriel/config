@@ -6,7 +6,10 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export NVM_DIR=$HOME/.nvm
 export PYENV_ROOT=$HOME/.pyenv
 export RBENV_ROOT=$HOME/.rbenv
+export GOENV_ROOT=$HOME/.goenv
 export PYENV_VERSION=3.6.5
+export GOENV_VERSION=1.11.4
+export GOPATH=$GOENV_ROOT/versions/$GOENV_VERSION/bin
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -37,7 +40,9 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
-  $PYENV_ROOT/bin
+  $GOPATH
+  $GOENV_ROOT/{bin,shims}
+  $PYENV_ROOT/{bin,shims}
   $RBENV_ROOT/bin
   $path
 )

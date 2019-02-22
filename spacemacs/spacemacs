@@ -33,7 +33,10 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
+   '(rust
+     ruby
+     go
+     systemd
      ansible
      better-defaults
      django
@@ -67,7 +70,7 @@ This function should only modify configuration layer settings."
      (restclient :variables
                  restclient-use-org t)
      (shell :variables
-            shell-default-shell 'multi-term
+            shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/zsh"
             shell-default-height 50
             shell-default-position 'top)
@@ -86,6 +89,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       atomic-chrome
                                       doom-themes
+                                      prettier-js
                                       rjsx-mode
                                       vue-mode
                                       nord-theme
@@ -530,3 +534,44 @@ before packages are loaded."
   )
 
   )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(beacon-color "#eab4484b8035")
+ '(evil-emacs-state-cursor (quote ("#E57373" hbar)) t)
+ '(evil-insert-state-cursor (quote ("#E57373" bar)) t)
+ '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
+ '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(highlight-indent-guides-auto-enabled nil)
+ '(highlight-symbol-colors
+   (quote
+    ("#FFEE58" "#C5E1A5" "#80DEEA" "#64B5F6" "#E1BEE7" "#FFCC80")))
+ '(highlight-symbol-foreground-color "#E0E0E0")
+ '(highlight-tail-colors (quote (("#eab4484b8035" . 0) ("#424242" . 100))))
+ '(jdee-db-active-breakpoint-face-colors (cons "#F0F4FC" "#5d86b6"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#F0F4FC" "#4F894C"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#F0F4FC" "#B8C5DB"))
+ '(package-selected-packages
+   (quote
+    (toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum which-key web-mode web-beautify vue-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tagedit systemd symon stylus-mode string-inflection sql-indent spotify spaceline-all-the-icons smeargle slim-mode slack shell-pop scss-mode sass-mode rjsx-mode reveal-in-osx-finder restclient-helm restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-restclient ob-http nord-theme nginx-mode neotree nameless mwim multi-term move-text markdown-toc magithub magit-svn magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode live-py-mode link-hint launchctl json-navigator js2-refactor js-doc jinja2-mode indent-guide importmagic impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy font-lock+ flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help engine-mode emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-themes doom-modeline dockerfile-mode docker diminish diff-hl dactyl-mode cython-mode counsel-projectile company-web company-tern company-statistics company-restclient company-go company-emoji company-ansible company-anaconda column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile atomic-chrome apropospriate-theme ansible-doc ansible aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(pos-tip-background-color "#3a513a513a51")
+ '(pos-tip-foreground-color "#9E9E9E")
+ '(tabbar-background-color "#353335333533"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(mode-line ((t (:box (:line-width 1 :color "#282828" :style nil)))))
+ '(mode-line-inactive ((t (:box (:line-width 1 :color "#3c3c3c" :style nil)))))
+ '(org-agenda-done ((t (:foreground "#86dc2f" :height 1.0))))
+ '(org-scheduled-today ((t (:foreground "DodgerBlue2" :height 1.0)))))
+)

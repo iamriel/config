@@ -373,6 +373,7 @@
 
      (spacemacs/set-leader-keys "mt" 'text-mode)
      (spacemacs/set-leader-keys "mw" 'web-mode)
+     (spacemacs/set-leader-keys "fp" 'prettier-js)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "bb" 'blacken-buffer)
    #+END_SRC
