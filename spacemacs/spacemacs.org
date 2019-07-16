@@ -81,6 +81,43 @@
      (setq nord-comment-brightness 19)
    #+END_SRC
    
+** Python shell interpreter fix
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     (with-eval-after-load 'python
+       (defun python-shell-completion-native-try ()
+         "Return non-nil if can trigger native completion."
+         (let ((python-shell-completion-native-enable t)
+               (python-shell-completion-native-output-timeout
+                python-shell-completion-native-try-output-timeout))
+           (python-shell-completion-native-get-completions
+            (get-buffer-process (current-buffer))
+            nil "_"))))
+   #+END_SRC
+   
+** Desktop Save
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     ;; (setq desktop-load-locked-desktop t)
+     ;; (call-interactively 'desktop-read t (vector "~/.emacs.d/desktops/" t))
+
+     ;; (add-hook 'spacemacs-post-user-config-hook
+     ;;              (lambda ()
+     ;;                (midnight-mode)
+     ;;                (desktop-save-mode)
+     ;;                (desktop-read)))
+
+     ;; (setq desktop-restore-eager 10)
+
+     ;; (defvar *my-desktop-save* nil
+     ;;   "Should I save the desktop when Emacs is shutting down?")
+
+     ;; (add-hook 'desktop-after-read-hook
+     ;;           (lambda () (setq *my-desktop-save* t)))
+
+     ;; (advice-add 'desktop-save :around
+     ;;             (lambda (fn &rest args)
+     ;;               (if (bound-and-true-p *my-desktop-save*)
+     ;;                   (apply fn args))))
+   #+END_SRC
 * user-config section
   This is where you place your configuration for user-config
 
@@ -90,12 +127,25 @@
      (put 'minibuffer-history 'history-length 50)
      (put 'evil-ex-history 'history-length 50)
      (put 'kill-ring 'history-length 25)
+
+     (with-eval-after-load 'python
+       (defun python-shell-completion-native-try ()
+         "Return non-nil if can trigger native completion."
+         (let ((python-shell-completion-native-enable t)
+               (python-shell-completion-native-output-timeout
+                python-shell-completion-native-try-output-timeout))
+           (python-shell-completion-native-get-completions
+            (get-buffer-process (current-buffer))
+            nil "_"))))
    #+END_SRC
   
 ** Org mode configuration and hooks
    Feed babel code block result to a separate buffer
    
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (when (version<= "9.2" (org-version))
+       (require 'org-tempo))
+
      (defun my-babel-to-buffer ()
        (interactive)
        (org-open-at-point)
@@ -295,8 +345,8 @@
        (if (projectile-project-p)
            (when (file-exists-p (concat (projectile-project-root) "manage.py"))
              (web-mode-set-engine "django")
-             (setq web-mode-code-indent-offset 4
-                   web-mode-markup-indent-offset 4)
+             (setq web-mode-code-indent-offset 2
+                   web-mode-markup-indent-offset 2)
              )
          )
        )
@@ -361,6 +411,11 @@
 
      (setq go-format-before-save t)
 
+     (setq lsp-pyls-configuration-sources ["flake8"])
+     (setq lsp-pyls-plugins-pylint-enabled nil)
+     (setq lsp-pyls-plugins-jedi-completion-include-params nil)
+
+
      (cancel-timer recentf-auto-save-timer)
    #+END_SRC
    
@@ -376,4 +431,8 @@
      (spacemacs/set-leader-keys "fp" 'prettier-js)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "bb" 'blacken-buffer)
+     (spacemacs/set-leader-keys-for-major-mode 'python-mode "ji" 'helm-imenu)
+
+     (evil-leader/set-key
+       "q q" 'spacemacs/frame-killer)
    #+END_SRC
