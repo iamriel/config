@@ -138,6 +138,19 @@
             (get-buffer-process (current-buffer))
             nil "_"))))
    #+END_SRC
+   
+** LSP
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     ;; (add-hook 'python-mode-hook (lambda()
+     ;;                               (setq lsp-pyls-configuration-sources ["flake8"]
+     ;;                                     lsp-pyls-plugins-pylint-enabled nil
+     ;;                                     lsp-pyls-plugins-jedi-completion-include-params nil)))
+     (defun lsp-set-cfg ()
+       (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
+         ;; TODO: check lsp--cur-workspace here to decide per server / project
+         (lsp--set-configuration lsp-cfg)))
+     (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg)
+   #+END_SRC
   
 ** Org mode configuration and hooks
    Feed babel code block result to a separate buffer
@@ -399,6 +412,12 @@
                   ))
     #+END_SRC
 
+*** Python mode hook
+    #+begin_src emacs-lisp :tangle ~/.user-config.el
+      (add-hook 'python-mode-hook (lambda ()
+                                    (setq flycheck-checker 'python-flake8)))
+    #+end_src
+
 ** Variable settings and overrides
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      ;; Set default column view headings: Task Total-Time Time-Stamp
@@ -410,13 +429,7 @@
      (setq projectile-enable-caching t)
 
      (setq go-format-before-save t)
-
-     (setq lsp-pyls-configuration-sources ["flake8"])
-     (setq lsp-pyls-plugins-pylint-enabled nil)
-     (setq lsp-pyls-plugins-jedi-completion-include-params nil)
-
-
-     (cancel-timer recentf-auto-save-timer)
+     ;; (cancel-timer recentf-auto-save-timer)
    #+END_SRC
    
 ** Key bindings

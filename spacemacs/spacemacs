@@ -47,8 +47,14 @@ This function should only modify configuration layer settings."
      git
      github
      html
-     javascript
-     lsp
+     (javascript :variables
+                 javascript-import-tool 'import-js
+                 javascript-backend 'lsp
+                 )
+     (lsp :variables
+          lsp-pyls-plugins-pylint-enabled nil
+          lsp-pyls-plugins-jedi-completion-include-params nil
+          )
      markdown
      nginx
      (org :variables
@@ -576,8 +582,11 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     ((eval add-hook
            (quote before-save-hook)
-           (function blacken-buffer)
-           nil t)
+           (quote spacemacs/python-remove-unused-imports))
+     (eval add-hook
+           (quote before-save-hook)
+           (quote blacken-buffer))
+     (ansible::vault-password-file . "~/.ansible_vault/rocketmail.txt")
      (eval progn
            (add-to-list
             (quote exec-path)
