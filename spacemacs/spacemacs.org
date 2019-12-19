@@ -90,6 +90,32 @@
      (put 'minibuffer-history 'history-length 50)
      (put 'evil-ex-history 'history-length 50)
      (put 'kill-ring 'history-length 25)
+
+     (with-eval-after-load 'python
+       (defun python-shell-completion-native-try ()
+         "Return non-nil if can trigger native completion."
+         (let ((python-shell-completion-native-enable t)
+               (python-shell-completion-native-output-timeout
+                python-shell-completion-native-try-output-timeout))
+           (python-shell-completion-native-get-completions
+            (get-buffer-process (current-buffer))
+            nil "_"))))
+
+     (eval-after-load 'typescript-mode
+       '(add-hook 'typescript-mode-hook #'add-node-modules-path))
+   #+END_SRC
+   
+** LSP
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     ;; (add-hook 'python-mode-hook (lambda()
+     ;;                               (setq lsp-pyls-configuration-sources ["flake8"]
+     ;;                                     lsp-pyls-plugins-pylint-enabled nil
+     ;;                                     lsp-pyls-plugins-jedi-completion-include-params nil)))
+     (defun lsp-set-cfg ()
+       (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
+         ;; TODO: check lsp--cur-workspace here to decide per server / project
+         (lsp--set-configuration lsp-cfg)))
+     (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg)
    #+END_SRC
   
 ** Org mode configuration and hooks
@@ -263,8 +289,12 @@
    Enable web-mode for the following files and add default offset
 
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-     (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.blade\\." . web-mode))
+     ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+     (setq web-mode-engines-alist
+           '(("blade"  . "\\.blade\\."))
+     )
 
      (setq
      css-indent-offset 2
@@ -321,6 +351,7 @@
                (lambda () (modify-syntax-entry ?_ "w")))
      (add-hook 'js2-mode-hook
                (lambda () (modify-syntax-entry ?_ "w")))
+
    #+END_SRC
    
    Make default offset for js2-mode and disable errors and warnings
@@ -360,8 +391,11 @@
      (setq projectile-enable-caching t)
 
      (setq go-format-before-save t)
+     ;; (cancel-timer recentf-auto-save-timer)
 
-     (cancel-timer recentf-auto-save-timer)
+     (setq neo-theme 'icons)
+
+     (add-to-list 'auto-mode-alist '("\\.gql\\." . graphql-mode))
    #+END_SRC
    
 ** Key bindings
@@ -376,3 +410,26 @@
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "bb" 'blacken-buffer)
    #+END_SRC
+** Restclient
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (defvar my-restclient-token nil)
+     (defun my-restclient-hook ()
+       "Update token from a request."
+       (save-excursion
+         (save-match-data
+           ;; update regexp to extract required data
+           (when (re-search-forward "\"token\":\"\\(.*?\\)\"" nil t)
+             (setq my-restclient-token (match-string 1))))))
+
+     (add-hook 'restclient-response-received-hook #'my-restclient-hook)
+   #+END_SRC
+** Slack config
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (slack-register-team
+      :name "rocketmail"
+      :default t
+      :client-id "402953958275.773306931700"
+      :client-secret "100bd115adf1855a7b200d78a5c4fe21"
+      :token "xoxp-402953958275-404124583127-762314377555-80e558d7a4605f5ae121d6c28ccaafe9")
+   #+END_SRC
+

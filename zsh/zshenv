@@ -7,6 +7,14 @@ export EDITOR='vim'
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export SASS_PATH=/usr/local/bin/sass
 export GPG_TTY=$(tty)
+export NVM_DIR=$HOME/.nvm
+export PHPENV_ROOT=$HOME/.phpenv
+export PYENV_ROOT=$HOME/.pyenv
+export RBENV_ROOT=$HOME/.rbenv
+export GOENV_ROOT=$HOME/.goenv
+export GOENV_VERSION=1.11.4
+export GOPATH=$HOME/gopath/$GOENV_VERSION
+export PIPENV_IGNORE_VIRTUALENVS=1
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -37,6 +45,13 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
+  $HOME/.yarn/bin
+  $GOPATH/bin
+  $PHPENV_ROOT/{bin,shims}
+  $GOENV_ROOT/{bin,shims}
+  $PYENV_ROOT/{bin,shims}
+  $RBENV_ROOT/bin
+  # OSX
   /usr/local/opt/python/libexec/bin
   /usr/local/opt/ffmpeg@2.8/bin
   /usr/local/opt/php56/bin

@@ -33,25 +33,29 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
+   '(
      ansible
      better-defaults
+     csv
+     dap
      django
      docker
      emacs-lisp
      git
      github
+     go
      html
-     javascript
      markdown
+     neotree
      nginx
-     (org :variables
-          org-confirm-babel-evaluate nil)
      osx
+     ruby
+     rust
      search-engine
      slack
      spotify
      sql
+     systemd
      theming
      vimscript
      yaml
@@ -59,6 +63,20 @@ This function should only modify configuration layer settings."
                       auto-completion-return-key-behavior nil
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-complete-with-key-sequence (kbd "jk"))
+     (javascript :variables
+                 node-add-modules-path t
+                 javascript-import-tool 'import-js
+                 javascript-backend 'lsp
+                 )
+     (lsp :variables
+          lsp-enable-file-watchers nil
+          lsp-pyls-plugins-pylint-enabled nil
+          lsp-pyls-plugins-jedi-completion-include-params nil
+          )
+     (org :variables
+          org-confirm-babel-evaluate nil)
+     (php :variables
+          php-backend 'lsp)
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      (helm :variables
            helm-no-header t)
@@ -73,7 +91,13 @@ This function should only modify configuration layer settings."
             shell-default-position 'top)
      ;; (spell-checking :variables spell-checking-enable-by-default nil)
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
+     (typescript :variables
+                 node-add-modules-path t
+                 ;; typescript-linter 'eslint
+                 ;; typescript-lsp-linter nil
+                 typescript-indent-level 2)
      (version-control :variables version-control-global-margin t)
+     (vue :variables vue-backend 'lsp)
      )
 
    ;; List of additional packages that will be installed without being
@@ -84,10 +108,16 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      all-the-icons
                                       atomic-chrome
                                       doom-themes
+                                      graphql-mode
+                                      jest
+                                      prettier-js
                                       rjsx-mode
-                                      vue-mode
+                                      nord-theme
+                                      dracula-theme
+                                      base16-theme
                                       (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       )
 
@@ -520,13 +550,13 @@ before packages are loaded."
   (load-file (concat default-directory ".user-config.el"))
 
   (require 'atomic-chrome)
+  (require 'dap-chrome)
 
   (atomic-chrome-start-server)
 
   (progn
     (spacemacs/set-leader-keys-for-major-mode 'python-mode "rr" 'py-isort-region)
   )
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -555,12 +585,62 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(beacon-color "#eab4484b8035")
+ '(evil-emacs-state-cursor (quote ("#E57373" hbar)) t)
+ '(evil-insert-state-cursor (quote ("#E57373" bar)) t)
+ '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
+ '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(highlight-indent-guides-auto-enabled nil)
+ '(highlight-symbol-colors
+   (quote
+    ("#FFEE58" "#C5E1A5" "#80DEEA" "#64B5F6" "#E1BEE7" "#FFCC80")))
+ '(highlight-symbol-foreground-color "#E0E0E0")
+ '(highlight-tail-colors (quote (("#eab4484b8035" . 0) ("#424242" . 100))))
+ '(jdee-db-active-breakpoint-face-colors (cons "#F0F4FC" "#5d86b6"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#F0F4FC" "#4F894C"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#F0F4FC" "#B8C5DB"))
+ '(org-agenda-files (quote ("/home/light/Org Files/agenda/gtd.org")))
  '(package-selected-packages
    (quote
-    (zenburn-theme yasnippet-snippets slack org-mime magithub impatient-mode editorconfig doom-themes doom-modeline docker counsel-projectile counsel swiper company-emoji window-purpose ghub sql-indent yaml-mode wakatime-mode elpy find-file-in-project ivy nginx-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete spinner adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (tide typescript-mode import-js grizzl add-node-modules-path csv-mode toml-mode racer helm-gtags ggtags flycheck-rust counsel-gtags cargo rust-mode seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum which-key web-mode web-beautify vue-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tagedit systemd symon stylus-mode string-inflection sql-indent spotify spaceline-all-the-icons smeargle slim-mode slack shell-pop scss-mode sass-mode rjsx-mode reveal-in-osx-finder restclient-helm restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-restclient ob-http nord-theme nginx-mode neotree nameless mwim multi-term move-text markdown-toc magithub magit-svn magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode live-py-mode link-hint launchctl json-navigator js2-refactor js-doc jinja2-mode indent-guide importmagic impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-spotify-plus helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy font-lock+ flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help engine-mode emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-themes doom-modeline dockerfile-mode docker diminish diff-hl dactyl-mode cython-mode counsel-projectile company-web company-tern company-statistics company-restclient company-go company-emoji company-ansible company-anaconda column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile atomic-chrome apropospriate-theme ansible-doc ansible aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(pos-tip-background-color "#3a513a513a51")
+ '(pos-tip-foreground-color "#9E9E9E")
  '(safe-local-variable-values
    (quote
-    ((eval progn
+    ((typescript-fmt-on-save . t)
+     (eval add-hook
+           (quote before-save-hook)
+           (function spacemacs/python-remove-unused-imports)
+           nil t)
+     (eval add-hook
+           (quote before-save-hook)
+           (function prettier-js)
+           nil t)
+     (eval add-hook
+           (quote before-save-hook)
+           (function py-isort-buffer)
+           nil t)
+     (eval add-hook
+           (quote before-save-hook)
+           (function blacken-buffer)
+           nil t)
+     (python-format-on-save . t)
+     (python-sort-imports-on-save . t)
+     (eval add-hook
+           (quote before-save-hook)
+           (quote prettier-js))
+     (eval add-hook
+           (quote before-save-hook)
+           (quote py-isort-buffer))
+     (eval add-hook
+           (quote before-save-hook)
+           (quote spacemacs/python-remove-unused-imports))
+     (eval add-hook
+           (quote before-save-hook)
+           (quote blacken-buffer))
+     (ansible::vault-password-file . "~/.ansible_vault/rocketmail.txt")
+     (eval progn
            (add-to-list
             (quote exec-path)
             (concat

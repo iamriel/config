@@ -1,23 +1,30 @@
+alias ..='cd ..'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 alias e='emacsclient --no-wait'
 
+# Python/Django Aliases
 alias migrate="./manage.py migrate"
 alias runserver="./manage.py runserver"
-alias shell="./manage.py shell"
+alias prunserver="pipenv run ./manage.py runserver"
+alias pshell="pipenv shell"
+alias mshell="./manage.py shell"
 alias showmigrations="./manage.py showmigrations"
+
+# Vagrant aliases
+alias vup="vagrant up"
+alias vssh="vagrant ssh"
+alias vsus="vagrant suspend"
+
+# npm aliases
+nr() {
+    #do things with parameters like $1 such as
+    npm run "$1"
+}
+
 
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder;"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder"
-
-# Work Inovation aliases
-alias inov_api="workon inov; cd ~/Projects/inovation/web_api;"
-alias inov_web="cd ~/Projects/inovation/web_app;"
-alias inov_infra="workon inov_infra; cd ~/Projects/inovation/infrastructure;"
-alias inov_celery="inov_api; celery -A workinovation worker -l info;"
-alias inov_celery_purge="inov_api; celery -A workinovation purge -f;"
-
-# Boundless aliases
-alias boundless_api="cd ~/Projects/sidney/boundless-django;"
-alias boundless_web="cd ~/Projects/sidney/boundless-frontend;"
 
 # Jens aliases
 alias metronom_api="cd ~/Projects/jens/metronom-pro-backend;"
