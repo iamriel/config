@@ -137,6 +137,9 @@
            (python-shell-completion-native-get-completions
             (get-buffer-process (current-buffer))
             nil "_"))))
+
+     (eval-after-load 'typescript-mode
+       '(add-hook 'typescript-mode-hook #'add-node-modules-path))
    #+END_SRC
    
 ** LSP
@@ -326,8 +329,12 @@
    Enable web-mode for the following files and add default offset
 
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-     (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.blade\\." . web-mode))
+     ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+     (setq web-mode-engines-alist
+           '(("blade"  . "\\.blade\\."))
+     )
 
      (setq
      css-indent-offset 2
@@ -384,6 +391,7 @@
                (lambda () (modify-syntax-entry ?_ "w")))
      (add-hook 'js2-mode-hook
                (lambda () (modify-syntax-entry ?_ "w")))
+
    #+END_SRC
    
    Make default offset for js2-mode and disable errors and warnings
@@ -430,6 +438,10 @@
 
      (setq go-format-before-save t)
      ;; (cancel-timer recentf-auto-save-timer)
+
+     (setq neo-theme 'icons)
+
+     (add-to-list 'auto-mode-alist '("\\.gql\\." . graphql-mode))
    #+END_SRC
    
 ** Key bindings
@@ -449,3 +461,26 @@
      (evil-leader/set-key
        "q q" 'spacemacs/frame-killer)
    #+END_SRC
+** Restclient
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (defvar my-restclient-token nil)
+     (defun my-restclient-hook ()
+       "Update token from a request."
+       (save-excursion
+         (save-match-data
+           ;; update regexp to extract required data
+           (when (re-search-forward "\"token\":\"\\(.*?\\)\"" nil t)
+             (setq my-restclient-token (match-string 1))))))
+
+     (add-hook 'restclient-response-received-hook #'my-restclient-hook)
+   #+END_SRC
+** Slack config
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (slack-register-team
+      :name "rocketmail"
+      :default t
+      :client-id "402953958275.773306931700"
+      :client-secret "100bd115adf1855a7b200d78a5c4fe21"
+      :token "xoxp-402953958275-404124583127-762314377555-80e558d7a4605f5ae121d6c28ccaafe9")
+   #+END_SRC
+

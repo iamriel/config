@@ -16,7 +16,7 @@ autoload -U compinit && compinit
 autoload -U promptinit; promptinit
 prompt pure
 
-# source <(cat ~/.oh-my-zsh/custom/alias/*)
+source <(cat ~/.oh-my-zsh/custom/alias/*)
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -34,4 +34,7 @@ fi
 if command -v goenv 1>/dev/null 2>&1; then
   eval "$(goenv init -)"
 fi
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+if command -v phpenv 1>/dev/null 2>&1; then
+  eval "$(phpenv init -)"
+fi
