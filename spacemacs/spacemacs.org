@@ -95,28 +95,9 @@
    #+END_SRC
    
 ** Desktop Save
+** Hooks
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
-     ;; (setq desktop-load-locked-desktop t)
-     ;; (call-interactively 'desktop-read t (vector "~/.emacs.d/desktops/" t))
-
-     ;; (add-hook 'spacemacs-post-user-config-hook
-     ;;              (lambda ()
-     ;;                (midnight-mode)
-     ;;                (desktop-save-mode)
-     ;;                (desktop-read)))
-
-     ;; (setq desktop-restore-eager 10)
-
-     ;; (defvar *my-desktop-save* nil
-     ;;   "Should I save the desktop when Emacs is shutting down?")
-
-     ;; (add-hook 'desktop-after-read-hook
-     ;;           (lambda () (setq *my-desktop-save* t)))
-
-     ;; (advice-add 'desktop-save :around
-     ;;             (lambda (fn &rest args)
-     ;;               (if (bound-and-true-p *my-desktop-save*)
-     ;;                   (apply fn args))))
+     (add-hook 'react-mode-hook 'emmet-mode)
    #+END_SRC
 * user-config section
   This is where you place your configuration for user-config
@@ -161,6 +142,8 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (when (version<= "9.2" (org-version))
        (require 'org-tempo))
+
+     (setq org-babel-python-command "python3")
 
      (defun my-babel-to-buffer ()
        (interactive)
@@ -398,6 +381,7 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (add-hook 'js2-mode-hook (lambda ()
                                 (setq js2-basic-offset 2)
+                                (setq js2-indent-level 2)
                                 (setq js2-mode-show-parse-errors nil)
                                 (setq js2-mode-show-strict-warnings nil)
                                 ))
@@ -407,6 +391,11 @@
                  (setq web-mode-script-padding 0)
                  (setq web-mode-style-padding 0)
                  ))
+
+     (add-hook 'json-mode-hook
+               (lambda ()
+                 (make-local-variable 'js-indent-level)
+                 (setq js-indent-level 2)))
    #+END_SRC
 
 *** Rjsx mode
