@@ -42,10 +42,13 @@ This function should only modify configuration layer settings."
      django
      docker
      emacs-lisp
+     epub
      git
      github
      go
      html
+     ;; this requires manual install https://github.com/anmoljagetia/leetcode-emacs-layer
+     myleetcode
      markdown
      neotree
      nginx
@@ -267,6 +270,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-themes '(
                          nord
                          dracula
+                         doom-spacegrey
                          doom-nord
                          doom-solarized-light
                          doom-one-light
