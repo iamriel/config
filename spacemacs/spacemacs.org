@@ -102,6 +102,21 @@
 * user-config section
   This is where you place your configuration for user-config
 
+** no-littering
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (require 'no-littering)
+     (require 'recentf)
+
+     ;; Move autosave file
+     (setq auto-save-file-name-transforms
+           `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+     ;; Remove custom vars in init.el
+     (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+
+     (add-to-list 'recentf-exclude no-littering-var-directory)
+     (add-to-list 'recentf-exclude no-littering-etc-directory)
+   #+END_SRC
 ** Generic emacs config
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (require 'window-purpose)
