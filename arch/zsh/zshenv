@@ -42,11 +42,11 @@ unset path_file
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/opt/openssl/bin
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
   $HOME/.yarn/bin
+  $HOME/.scripts
   $GOPATH/bin
   $PHPENV_ROOT/{bin,shims}
   $GOENV_ROOT/{bin,shims}

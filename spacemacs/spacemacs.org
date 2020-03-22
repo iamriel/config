@@ -77,7 +77,7 @@
              (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
              )
              ))
-     (load-file "~/.emacs.d/private/blacken/blacken.el")
+     ;; (load-file "~/.emacs.d/private/blacken/blacken.el")
      (setq nord-comment-brightness 19)
    #+END_SRC
    
@@ -113,6 +113,7 @@
 
      ;; Remove custom vars in init.el
      (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+     (load custom-file)
 
      (add-to-list 'recentf-exclude no-littering-var-directory)
      (add-to-list 'recentf-exclude no-littering-etc-directory)
