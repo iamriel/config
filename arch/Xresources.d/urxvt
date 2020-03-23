@@ -1,7 +1,7 @@
 ! URxvt.font:                       9x15,xft:Menlo for Powerline,xft:DejaVu Sans Mono:autohint=true:size=12
 ! URxvt.font:                       9x15,xft:Source Code Pro,xft:DejaVu Sans Mono:autohint=true:size=12
 
-URxvt.font:                       xft:SauceCodeProNerdFont:autohint=true:size=12,xft:DejaVu Sans Mono:autohint=true:size=12,xft:TerminessTTFNerdFontMono:autohint=true:size=12
+URxvt.font:                       xft:SourceCodePro:autohint=true:size=12,xft:DejaVu Sans Mono:autohint=true:size=12,xft:TerminessTTFNerdFontMono:autohint=true:size=12
 ! URxvt.boldFont:                 xft:DejaVu Sans Mono:autohint=true:bold:size=12
 ! URxvt.italicFont:               xft:DejaVu Sans Mono:autohint=true:italic:size=12
 ! URxvt.boldItalicFont:           xft:DejaVu Sans Mono:autohint=true:bold:italic:size=12

@@ -11,4 +11,6 @@ Xft.lcdfilter: lcddefault
 #include ".Xresources.d/xterm"
 #include ".Xresources.d/urxvt"
 #include ".Xresources.d/fonts"
+#include ".Xresources.d/typeface"
+#include ".Xresources.d/i3blocks"
 

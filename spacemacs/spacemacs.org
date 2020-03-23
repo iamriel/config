@@ -446,9 +446,6 @@
 
      (setq projectile-enable-caching t)
 
-     (setq go-format-before-save t)
-     ;; (cancel-timer recentf-auto-save-timer)
-
      (setq neo-theme 'icons)
 
      (add-to-list 'auto-mode-alist '("\\.gql\\." . graphql-mode))
