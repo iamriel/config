@@ -537,12 +537,6 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 ##        Workspace Monitor         ##
 ##                                  ##
 ######################################
-workspace number 1 output primary
-
-
-
-
-# workspace "1:<span font_desc='Source Code Pro 12'> 1 </span><span foreground='#81A1C1'></span>" output primary
-# workspace "2:<span font_desc='Source Code Pro 12'> 2 </span><span foreground='#81A1C1'></span>" output primary
-# workspace $ws2 output primary
-# workspace $ws3 output primary
+workspace "1:<span font_desc=\"Source Code Pro 12\"> 1 </span><span foreground=\"#81A1C1\"></span>" output primary
+workspace "2:<span font_desc=\"Source Code Pro 12\"> 2 </span><span foreground=\"#88C0D0\"></span>" output primary
+workspace "3:<span font_desc=\"Source Code Pro 12\"> 3 </span><span foreground=\"#A3BE8C\"></span>" output primary
