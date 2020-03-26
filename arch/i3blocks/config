@@ -74,8 +74,8 @@ min_width=100%
 # Displays total percentage charge left of specified battery.
 # You can specify the instance by adding:
 # instance=BAT0
-[battery3]
-interval=30
+# [battery3]
+# interval=30
 
 # Date Time
 [time2]

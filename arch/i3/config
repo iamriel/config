@@ -20,7 +20,7 @@ bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
 # Sets i3 font for dialogs
-set_from_resource $i3-wm.font i3-wm.font "pango:Source Code Pro Medium 12"
+set_from_resource $i3-wm.font i3-wm.font "pango:Source Code Pro 12"
 font $i3-wm.font
 
 # Use Mouse+$mod to drag floating windows
@@ -87,7 +87,7 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 ## Modify // Window Layout Mode // <mod> t ##
-bindsym $mod+t layout
+bindsym $mod+t layout toggle tabbed splith splitv
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
@@ -197,7 +197,7 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
+for_window [class="Cheese"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
@@ -283,16 +283,16 @@ bindsym $mod+9 exec --no-startup-id blurlock
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id manjaro-hello
 # exec --no-startup-id xautolock -time 10 -locker blurlock
+# exec --no-startup-id pamac-tray
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id ~/.scripts/startup.sh
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id start_conky_maia
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-exec --no-startup-id start_conky_maia
 exec --no-startup-id ckb-next --background
 exec --no-startup-id xset r rate 185 100
-exec --no-startup-id ~/.scripts/startup.sh
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -328,10 +328,31 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 set_from_resource $i3-wm.bar.position i3-wm.bar.position bottom
-set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 12, Material Design Icons 12"
+set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro 12, Material Design Icons 12"
 set_from_resource $i3-wm.bar.separator i3-wm.bar.separator " "
 set_from_resource $i3-wm.bar.trayoutput i3-wm.bar.trayoutput none
 set_from_resource $i3-wm.bar.stripworkspacenumbers i3-wm.bar.stripworkspacenumbers yes
+
+# Create variables from Xresources for i3bars's look.
+set_from_resource $i3-wm.bar.background.color i3-wm.bar.background.color "#222D31"
+set_from_resource $i3-wm.bar.statusline.color i3-wm.bar.statusline.color "#F9FAF9"
+set_from_resource $i3-wm.bar.separator.color i3-wm.bar.separator.color "#454947"
+
+set_from_resource $i3-wm.bar.workspace.focused.border.color i3-wm.bar.workspace.focused.border.color "#073642"
+set_from_resource $i3-wm.bar.workspace.focused.background.color i3-wm.bar.workspace.focused.background.color "#073642"
+set_from_resource $i3-wm.bar.workspace.focused.text.color i3-wm.bar.workspace.focused.text.color "#eee8d5"
+
+set_from_resource $i3-wm.bar.workspace.active.border.color i3-wm.bar.workspace.active.border.color "#073642"
+set_from_resource $i3-wm.bar.workspace.active.background.color i3-wm.bar.workspace.active.background.color "#073642"
+set_from_resource $i3-wm.bar.workspace.active.text.color i3-wm.bar.workspace.active.text.color "#586e75"
+
+set_from_resource $i3-wm.bar.workspace.inactive.border.color i3-wm.bar.workspace.inactive.border.color "#002b36"
+set_from_resource $i3-wm.bar.workspace.inactive.background.color i3-wm.bar.workspace.inactive.background.color "#002b36"
+set_from_resource $i3-wm.bar.workspace.inactive.text.color i3-wm.bar.workspace.inactive.text.color "#586e75"
+
+set_from_resource $i3-wm.bar.workspace.urgent.border.color i3-wm.bar.workspace.urgent.border.color "#dc322f"
+set_from_resource $i3-wm.bar.workspace.urgent.background.color i3-wm.bar.workspace.urgent.background.color "#dc322f"
+set_from_resource $i3-wm.bar.workspace.urgent.text.color i3-wm.bar.workspace.urgent.text.color "#fdf6e3"
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
@@ -346,16 +367,21 @@ bar {
 	bindsym button5 nop
 
     colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
+        background $i3-wm.bar.background.color
+        statusline $i3-wm.bar.statusline.color
+        separator  $i3-wm.bar.separator.color
 
 ##                         BORDER  BACKGR. TEXT
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
+        # focused_workspace  #F9FAF9 #16a085 #292F34
+        # active_workspace   #595B5B #353836 #FDF6E3
+        # inactive_workspace #595B5B #222D31 #EEE8D5
+        # binding_mode       #16a085 #2C2C2C #F9FAF9
+        # urgent_workspace   #16a085 #FDF6E3 #E5201D
+
+        focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
+        active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
+        inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
+        urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
     }
 }
 
@@ -376,9 +402,11 @@ bindsym $mod+m bar mode toggle
 ### settings for i3-gaps: ###
 #############################
 
-# Set inner/outer gaps
-gaps inner 0
-gaps outer 0
+# Specify the distance between windows in pixels. (i3-gaps)
+set_from_resource $i3-wm.gaps.inner.size i3-wm.gaps.inner.size 5
+set_from_resource $i3-wm.gaps.outer.size i3-wm.gaps.outer.size 0
+gaps inner $i3-wm.gaps.inner.size
+gaps outer $i3-wm.gaps.outer.size
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -450,6 +478,7 @@ bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 
 ## Launch // Terminal // <Super> Enter ##
 bindsym $mod+Return exec terminal
+bindsym $mod+enter exec terminal
 
 # Launch // Program Launcher // <Mod> d
 bindsym $mod+d exec --no-startup-id dmenu_recency
@@ -466,8 +495,8 @@ bindsym $mod+e exec /usr/bin/emacs
 ## Launch // Slack // <mod> s ##
 bindsym $mod+s exec /usr/bin/slack
 
-## Launch // System Menu // <Mod><Ctrl> b ##
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+## Launch // System Settings Menu // <Mod><Ctrl> s ##
+bindsym $mod+Ctrl+s exec terminal -e 'bmenu'
 
 ## Launch // File Manager // <Mod> F3
 bindsym $mod+F3 exec pcmanfm
@@ -479,8 +508,10 @@ bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
 
 ## Launch // Print // Print
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+set $flameshot_dir ~/Pictures/flameshot
+bindsym Print exec --no-startup-id flameshot screen -p $flameshot_dir
+bindsym Shift+Print exec --no-startup-id flameshot gui -p $flameshot_dir
+# bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
 ## Launch // Bluetooth Manager // <Mod> b
 bindsym $mod+b exec blueman-manager
@@ -506,6 +537,12 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 ##        Workspace Monitor         ##
 ##                                  ##
 ######################################
-workspace 1 output primary
-workspace 2 output primary
-workspace 3 output primary
+workspace number 1 output primary
+
+
+
+
+# workspace "1:<span font_desc='Source Code Pro 12'> 1 </span><span foreground='#81A1C1'></span>" output primary
+# workspace "2:<span font_desc='Source Code Pro 12'> 2 </span><span foreground='#81A1C1'></span>" output primary
+# workspace $ws2 output primary
+# workspace $ws3 output primary

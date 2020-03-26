@@ -38,7 +38,6 @@ This function should only modify configuration layer settings."
      better-defaults
      copy-as-format
      csv
-     dap
      django
      docker
      emacs-lisp
@@ -62,7 +61,6 @@ This function should only modify configuration layer settings."
      sql
      systemd
      theming
-     unicode-fonts
      vimscript
      yaml
      (auto-completion :variables
@@ -82,6 +80,7 @@ This function should only modify configuration layer settings."
           )
      (org :variables
           org-confirm-babel-evaluate nil)
+     (node :variables node-add-modules-path t)
      (php :variables
           php-backend 'lsp)
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
@@ -560,11 +559,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-(require 'window-purpose) ; workaround until https://github.com/bmag/emacs-purpose/issues/158 is fixed
+  (require 'window-purpose) ; workaround until https://github.com/bmag/emacs-purpose/issues/158 is fixed
   (load-file (concat default-directory ".user-config.el"))
 
   (require 'atomic-chrome)
-  (require 'dap-chrome)
 
   (atomic-chrome-start-server)
 
