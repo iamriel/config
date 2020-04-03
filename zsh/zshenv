@@ -13,9 +13,10 @@ export GOENV_VERSION=1.11.4
 export GOPATH=$HOME/gopath/$GOENV_VERSION
 
 export PYENV_ROOT=$HOME/.pyenv
-export PIPENV_IGNORE_VIRTUALENVS=1
 export PYTHON_VERSION=3.6.5
 export PYTHONHOME=$PYENV_ROOT/versions/$PYTHON_VERSION
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_INSTALL_TIMEOUT=9999
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path

@@ -5,6 +5,7 @@ export EDITOR="vim"
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 export NVM_DIR=$HOME/.nvm
+export NODE_VERSION=v12.16.1
 export PHPENV_ROOT=$HOME/.phpenv
 export RBENV_ROOT=$HOME/.rbenv
 
@@ -13,8 +14,9 @@ export GOENV_VERSION=1.11.4
 export GOPATH=$HOME/gopath/$GOENV_VERSION
 
 export PYENV_ROOT=$HOME/.pyenv
-export PIPENV_IGNORE_VIRTUALENVS=1
 export PYTHON_VERSION=3.6.10
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_INSTALL_TIMEOUT=9999
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -44,8 +46,8 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
-  $HOME/.yarn/bin
   $HOME/.scripts
+  $NVM_DIR/versions/node/$NODE_VERSION/bin
   $GOPATH/bin
   $PHPENV_ROOT/{bin,shims}
   $GOENV_ROOT/{bin,shims}

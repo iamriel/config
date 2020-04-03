@@ -105,7 +105,7 @@
 ** no-littering
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (require 'no-littering)
-     (require 'recentf)
+     ;; (require 'recentf)
 
      ;; Move autosave file
      (setq auto-save-file-name-transforms
@@ -115,8 +115,8 @@
      (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
      (load custom-file)
 
-     (add-to-list 'recentf-exclude no-littering-var-directory)
-     (add-to-list 'recentf-exclude no-littering-etc-directory)
+     ;; (add-to-list 'recentf-exclude no-littering-var-directory)
+     ;; (add-to-list 'recentf-exclude no-littering-etc-directory)
    #+END_SRC
 ** Generic emacs config
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
@@ -326,6 +326,7 @@
       (setq
        atomic-chrome-default-major-mode 'markdown-mode
       )
+      (setq atomic-chrome-buffer-open-style 'full)
    #+END_SRC
 
 ** Web mode configuration and hooks
