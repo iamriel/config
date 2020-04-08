@@ -457,11 +457,14 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-######################################
-##                                  ##
-##        Launch Applications       ##
-##                                  ##
-######################################
+##########################################
+##                                      ##
+##  Launch Applications/ Key Bindings   ##
+##                                      ##
+##########################################
+
+## Fix mouse // <mod> Shift m ##
+bindsym $mod+Shift+m exec --no-startup-id ~/.scripts/re-enable-mouse.sh
 
 set_from_resource $rofiTheme rofi.theme "rofi"
 

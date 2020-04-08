@@ -42,6 +42,8 @@ SPACESHIP_PROMPT_ORDER=(
 
 SPACESHIP_CHAR_SYMBOL="❯ "
 SPACESHIP_VI_MODE_COLOR="black"
+SPACESHIP_DIR_TRUNC=4
+SPACESHIP_DIR_TRUNC_REPO=false
 
 ZSH_THEME="spaceship"
 plugins=(
@@ -63,7 +65,7 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-# source <(cat ~/.oh-my-zsh/custom/alias/*)
+source <(cat ~/.oh-my-zsh/custom/alias/*)
 
 eval `dircolors ~/.dir_colors`
 
