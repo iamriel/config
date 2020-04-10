@@ -1,0 +1,46 @@
+i3blocks.label.color:       color_base0
+i3blocks.value.color:       color_base1
+i3blocks.value.font:        typeface_bar_glyph
+i3blocks.critical.color:    color_red
+i3blocks.error.color:       color_orange
+i3blocks.warning:           color_yellow
+i3blocks.nominal:           color_base0
+
+i3blocks.label.thermometer: typeface_bar_glyph_thermometer
+
+i3blocks.label.wifi: typeface_bar_glyph_wifi
+i3blocks.label.wired: typeface_bar_glyph_wired
+i3blocks.label.up: typeface_bar_glyph_up
+i3blocks.label.dn: typeface_bar_glyph_dn
+
+i3blocks.label.cpu: typeface_bar_glyph_cpu
+
+i3blocks.label.battery100: typeface_bar_glyph_battery_100
+i3blocks.label.battery80: typeface_bar_glyph_battery_80
+i3blocks.label.battery50: typeface_bar_glyph_battery_50
+i3blocks.label.battery20: typeface_bar_glyph_battery_20
+i3blocks.label.battery0: typeface_bar_glyph_battery_0
+i3blocks.label.batterycharging: typeface_bar_glyph_battery_charging
+i3blocks.label.batteryac: typeface_bar_glyph_battery_ac
+i3blocks.label.batteryunknown: typeface_bar_glyph_battery_unknown
+
+i3blocks.label.time: typeface_bar_glyph_time
+
+i3blocks.label.mediaplaying: typeface_bar_glyph_media_playing
+i3blocks.label.mediapaused: typeface_bar_glyph_media_paused
+
+i3blocks.label.notify.none: typeface_bar_glyph_notify_none
+i3blocks.label.notify.some: typeface_bar_glyph_notify_some
+i3blocks.label.notify.error: typeface_bar_glyph_notify_error
+
+i3blocks.label.help: typeface_bar_glyph_help
+
+i3blocks.label.sound: typeface_bar_glyph_sound
+i3blocks.label.mute: typeface_bar_glyph_mute
+i3blocks.label.memory: typeface_bar_glyph_memory
+
+i3blocks.label.on: typeface_bar_glyph_on
+i3blocks.label.off: typeface_bar_glyph_off
+
+i3blocks.label.capslock: typeface_bar_glyph_capslock
+i3blocks.label.numlock: typeface_bar_glyph_numlock

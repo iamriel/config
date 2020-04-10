@@ -1,0 +1,26 @@
+! -- Styles - Colors
+#include ".Xresources.d/colors"
+
+! -- Styles - Fonts
+#include ".Xresources.d/typeface"
+
+! -- Styles - Theme
+#include ".Xresources.d/theme"
+
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+
+! -- Applications
+! These files map values defined above into specific app settings.
+! #include ".Xresources.d/themes/nord"
+#include ".Xresources.d/i3-wm"
+#include ".Xresources.d/i3blocks"
+#include ".Xresources.d/rofi"
+#include ".Xresources.d/urxvt"
+

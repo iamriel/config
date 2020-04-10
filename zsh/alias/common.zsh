@@ -1,7 +1,8 @@
 alias ..='cd ..'
+alias c='clear'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-alias e='emacsclient --no-wait'
+alias e='emacsclient -nw'
 
 # Python/Django Aliases
 alias migrate="./manage.py migrate"

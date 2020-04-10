@@ -6,9 +6,20 @@ fi
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME=''
-plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions kubectl kops vi-mode)
+plugins=(
+  archlinux
+  git
+  zsh-syntax-highlighting
+  zsh-completions
+  zsh-autosuggestions
+  vi-mode
+)
 
-fpath=(~/.zsh/completion $fpath)
+fpath=(
+  ~/.zsh/completion
+  ~/.zsh/pure
+  $fpath
+)
 
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
@@ -18,11 +29,9 @@ prompt pure
 
 source <(cat ~/.oh-my-zsh/custom/alias/*)
 
-# Virtualenvwrapper Configuration
-source /usr/local/bin/virtualenvwrapper_lazy.sh
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/install-nvm-exec" ] && \. "$NVM_DIR/install-nvm-exec"
 
 eval `dircolors ~/.dir_colors/dircolors`
 

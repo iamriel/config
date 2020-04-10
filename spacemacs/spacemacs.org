@@ -70,27 +70,28 @@
   
 ** Theming Modification
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     (defun enable-doom-modeline-icons (_frame)
+       (setq doom-modeline-icon t))
+
+     (if (daemonp)
+         (add-hook 'after-make-frame-functions
+                   #'enable-doom-modeline-icons)
+         )
+
+     ;; theme
      (setq theming-modifications
            '(
              (apropospriate-dark
-              (mode-line :box (:line-width 1 :color "#282828" :style nil))
-              (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
-              )
+             (mode-line :box (:line-width 1 :color "#282828" :style nil))
+             (mode-line-inactive :box (:line-width 1 :color "#3c3c3c" :style nil))
+             )
              ))
-
-     (load-file "~/.emacs.d/private/blacken/blacken.el")
+     ;; (load-file "~/.emacs.d/private/blacken/blacken.el")
+     (setq nord-comment-brightness 19)
    #+END_SRC
    
-* user-config section
-  This is where you place your configuration for user-config
-
-** Generic emacs config
-   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     (setq history-length 100)
-     (put 'minibuffer-history 'history-length 50)
-     (put 'evil-ex-history 'history-length 50)
-     (put 'kill-ring 'history-length 25)
-
+** Python shell interpreter fix
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
      (with-eval-after-load 'python
        (defun python-shell-completion-native-try ()
          "Return non-nil if can trigger native completion."
@@ -100,6 +101,85 @@
            (python-shell-completion-native-get-completions
             (get-buffer-process (current-buffer))
             nil "_"))))
+   #+END_SRC
+   
+** Desktop Save
+** Hooks
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     (add-hook 'react-mode-hook 'emmet-mode)
+   #+END_SRC
+* user-config section
+  This is where you place your configuration for user-config
+
+** no-littering
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (require 'no-littering)
+     ;; (require 'recentf)
+
+     ;; Move autosave file
+     (setq auto-save-file-name-transforms
+           `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+     ;; Remove custom vars in init.el
+     (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+     (load custom-file)
+
+     ;; (add-to-list 'recentf-exclude no-littering-var-directory)
+     ;; (add-to-list 'recentf-exclude no-littering-etc-directory)
+   #+END_SRC
+** Generic emacs config
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (require 'window-purpose)
+
+     (spacemacs|do-after-display-system-init
+      (spacemacs/load-spacemacs-env))
+
+     (defvar my:theme 'nord)
+     (defvar my:theme-window-loaded nil)
+     (defvar my:theme-terminal-loaded nil)
+
+     (if (daemonp)
+         (add-hook 'after-make-frame-functions(lambda (frame)
+                                               (select-frame frame)
+                                               (if (window-system frame)
+                                                   (unless my:theme-window-loaded
+                                                     (if my:theme-terminal-loaded
+                                                         (enable-theme my:theme)
+                                                       (load-theme my:theme t))
+                                                     (setq my:theme-window-loaded t)
+                                                     )
+                                                 (unless my:theme-terminal-loaded
+                                                   (if my:theme-window-loaded
+                                                       (enable-theme my:theme)
+                                                     (load-theme my:theme t))
+                                                   (setq my:theme-terminal-loaded t)
+                                                   )
+                                                 )))
+
+       (progn
+         (load-theme my:theme t)
+         (if (display-graphic-p)
+             (setq my:theme-window-loaded t)
+           (setq my:theme-terminal-loaded t)))
+       )
+
+     (setq history-length 100)
+     (put 'minibuffer-history 'history-length 50)
+     (put 'evil-ex-history 'history-length 50)
+     (put 'kill-ring 'history-length 25)
+
+     (setq leetcode-prefer-language "python3")
+     (setq leetcode-prefer-sql "mysql")
+
+     ;; (with-eval-after-load 'python
+     ;;   (defun python-shell-completion-native-try ()
+     ;;     "Return non-nil if can trigger native completion."
+     ;;     (let ((python-shell-completion-native-enable t)
+     ;;           (python-shell-completion-native-output-timeout
+     ;;            python-shell-completion-native-try-output-timeout))
+     ;;       (python-shell-completion-native-get-completions
+     ;;        (get-buffer-process (current-buffer))
+     ;;        nil "_"))))
 
      (eval-after-load 'typescript-mode
        '(add-hook 'typescript-mode-hook #'add-node-modules-path))
@@ -122,6 +202,11 @@
    Feed babel code block result to a separate buffer
    
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (when (version<= "9.2" (org-version))
+       (require 'org-tempo))
+
+     (setq org-babel-python-command "python3")
+
      (defun my-babel-to-buffer ()
        (interactive)
        (org-open-at-point)
@@ -282,6 +367,7 @@
       (setq
        atomic-chrome-default-major-mode 'markdown-mode
       )
+      (setq atomic-chrome-buffer-open-style 'full)
    #+END_SRC
 
 ** Web mode configuration and hooks
@@ -325,8 +411,8 @@
        (if (projectile-project-p)
            (when (file-exists-p (concat (projectile-project-root) "manage.py"))
              (web-mode-set-engine "django")
-             (setq web-mode-code-indent-offset 4
-                   web-mode-markup-indent-offset 4)
+             (setq web-mode-code-indent-offset 2
+                   web-mode-markup-indent-offset 2)
              )
          )
        )
@@ -358,6 +444,7 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (add-hook 'js2-mode-hook (lambda ()
                                 (setq js2-basic-offset 2)
+                                (setq js2-indent-level 2)
                                 (setq js2-mode-show-parse-errors nil)
                                 (setq js2-mode-show-strict-warnings nil)
                                 ))
@@ -367,6 +454,11 @@
                  (setq web-mode-script-padding 0)
                  (setq web-mode-style-padding 0)
                  ))
+
+     (add-hook 'json-mode-hook
+               (lambda ()
+                 (make-local-variable 'js-indent-level)
+                 (setq js-indent-level 2)))
    #+END_SRC
 
 *** Rjsx mode
@@ -379,6 +471,12 @@
                   (emmet-mode 1)
                   ))
     #+END_SRC
+
+*** Python mode hook
+    #+begin_src emacs-lisp :tangle ~/.user-config.el
+      (add-hook 'python-mode-hook (lambda ()
+                                    (setq flycheck-checker 'python-flake8)))
+    #+end_src
 
 ** Variable settings and overrides
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
@@ -407,8 +505,26 @@
 
      (spacemacs/set-leader-keys "mt" 'text-mode)
      (spacemacs/set-leader-keys "mw" 'web-mode)
+     (spacemacs/set-leader-keys "fp" 'prettier-js)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "bb" 'blacken-buffer)
+     (spacemacs/set-leader-keys-for-major-mode 'python-mode "ji" 'helm-imenu)
+
+     (evil-leader/set-key
+       "q q" 'spacemacs/frame-killer)
+   #+END_SRC
+** Restclient
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (defvar my-restclient-token nil)
+     (defun my-restclient-hook ()
+       "Update token from a request."
+       (save-excursion
+         (save-match-data
+           ;; update regexp to extract required data
+           (when (re-search-forward "\"token\":\"\\(.*?\\)\"" nil t)
+             (setq my-restclient-token (match-string 1))))))
+
+     (add-hook 'restclient-response-received-hook #'my-restclient-hook)
    #+END_SRC
 ** Restclient
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
