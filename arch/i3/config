@@ -7,10 +7,6 @@ set $mod Mod1
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
-# Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
-default_floating_border normal
-
 # Hide borders
 hide_edge_borders smart
 
@@ -81,10 +77,15 @@ workspace_auto_back_and_forth yes
 # split orientation
 # bindsym $mod+h split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
+
+# Toggle // Split // <mod> q
 bindsym $mod+q split toggle
 
-# toggle fullscreen mode for the focused container
+# Toggle // fullscreen focused // <mod> f
 bindsym $mod+f fullscreen toggle
+
+# Toggle // tiling / floating // <mod><Shift> f
+bindsym $mod+Shift+f floating toggle
 
 ## Modify // Window Layout Mode // <mod> t ##
 bindsym $mod+t layout toggle tabbed splith splitv
@@ -202,6 +203,10 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
+for_window [window_role="pop-up"] floating enable
+for_window [class="zoom" instance="zoom"] floating enable
+for_window [instance="gimp"] floating enable
+
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -221,7 +226,7 @@ bindsym $mod+Shift+b exec reboot
 bindsym $mod+Shift+p exec shutdown
 
 # Session // Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features // <Mod> 0
 bindsym $mod+0 mode "$mode_system"
@@ -237,6 +242,7 @@ mode "$mode_system" {
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
+    bindsym KP_Enter mode "default"
     bindsym Escape mode "default"
 }
 
@@ -261,6 +267,7 @@ mode "resize" {
 
         # exit resize mode: Enter or Escape
         bindsym Return mode "default"
+        bindsym KP_Enter mode "default"
         bindsym Escape mode "default"
 }
 
@@ -481,7 +488,7 @@ bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 
 ## Launch // Terminal // <Super> Enter ##
 bindsym $mod+Return exec terminal
-bindsym $mod+enter exec terminal
+bindsym $mod+KP_Enter exec terminal
 
 # Launch // Program Launcher // <Mod> d
 bindsym $mod+d exec --no-startup-id dmenu_recency
@@ -491,9 +498,13 @@ bindsym $mod+z exec --no-startup-id morc_menu
 
 ## Launch // Browser // <Super><Shift> Enter ##
 bindsym $mod+Shift+Return exec default_browser
+bindsym $mod+Shift+KP_Enter exec default_browser
 
-## Launch // Emacs // <mod> e ##
-bindsym $mod+e exec /usr/bin/emacs
+## Launch // Emacsclient // <mod> e ##
+bindsym $mod+e exec --no-startup-id emacsclient -nc
+
+## Launch // Emacs // <mod><Shift> e ##
+bindsym $mod+Shift+e exec emacs
 
 ## Launch // Slack // <mod> s ##
 bindsym $mod+s exec /usr/bin/slack

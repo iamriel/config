@@ -18,6 +18,7 @@ Xft.lcdfilter: lcddefault
 
 ! -- Applications
 ! These files map values defined above into specific app settings.
+! #include ".Xresources.d/themes/nord"
 #include ".Xresources.d/i3-wm"
 #include ".Xresources.d/i3blocks"
 #include ".Xresources.d/rofi"

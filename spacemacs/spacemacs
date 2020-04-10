@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
      (helm :variables
            helm-no-header t)
      (python :variables
+             python-shell-completion-native-enable t
              python-backend 'lsp
              python-formatter 'black
              python-test-runner 'pytest)

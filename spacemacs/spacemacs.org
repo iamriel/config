@@ -70,6 +70,15 @@
   
 ** Theming Modification
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     (defun enable-doom-modeline-icons (_frame)
+       (setq doom-modeline-icon t))
+
+     (if (daemonp)
+         (add-hook 'after-make-frame-functions
+                   #'enable-doom-modeline-icons)
+         )
+
+     ;; theme
      (setq theming-modifications
            '(
              (apropospriate-dark
@@ -122,6 +131,38 @@
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (require 'window-purpose)
 
+     (spacemacs|do-after-display-system-init
+      (spacemacs/load-spacemacs-env))
+
+     (defvar my:theme 'nord)
+     (defvar my:theme-window-loaded nil)
+     (defvar my:theme-terminal-loaded nil)
+
+     (if (daemonp)
+         (add-hook 'after-make-frame-functions(lambda (frame)
+                                               (select-frame frame)
+                                               (if (window-system frame)
+                                                   (unless my:theme-window-loaded
+                                                     (if my:theme-terminal-loaded
+                                                         (enable-theme my:theme)
+                                                       (load-theme my:theme t))
+                                                     (setq my:theme-window-loaded t)
+                                                     )
+                                                 (unless my:theme-terminal-loaded
+                                                   (if my:theme-window-loaded
+                                                       (enable-theme my:theme)
+                                                     (load-theme my:theme t))
+                                                   (setq my:theme-terminal-loaded t)
+                                                   )
+                                                 )))
+
+       (progn
+         (load-theme my:theme t)
+         (if (display-graphic-p)
+             (setq my:theme-window-loaded t)
+           (setq my:theme-terminal-loaded t)))
+       )
+
      (setq history-length 100)
      (put 'minibuffer-history 'history-length 50)
      (put 'evil-ex-history 'history-length 50)
@@ -130,15 +171,15 @@
      (setq leetcode-prefer-language "python3")
      (setq leetcode-prefer-sql "mysql")
 
-     (with-eval-after-load 'python
-       (defun python-shell-completion-native-try ()
-         "Return non-nil if can trigger native completion."
-         (let ((python-shell-completion-native-enable t)
-               (python-shell-completion-native-output-timeout
-                python-shell-completion-native-try-output-timeout))
-           (python-shell-completion-native-get-completions
-            (get-buffer-process (current-buffer))
-            nil "_"))))
+     ;; (with-eval-after-load 'python
+     ;;   (defun python-shell-completion-native-try ()
+     ;;     "Return non-nil if can trigger native completion."
+     ;;     (let ((python-shell-completion-native-enable t)
+     ;;           (python-shell-completion-native-output-timeout
+     ;;            python-shell-completion-native-try-output-timeout))
+     ;;       (python-shell-completion-native-get-completions
+     ;;        (get-buffer-process (current-buffer))
+     ;;        nil "_"))))
 
      (eval-after-load 'typescript-mode
        '(add-hook 'typescript-mode-hook #'add-node-modules-path))

@@ -16,8 +16,10 @@ URxvt.background:                 [100]#222D31
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
-URxvt*background:                 black
+! URxvt*background:                 gray30
 URxvt*foreground:                 grey
+! URxvt*background:                 nord0
+! URxvt*foreground:                 nord4
 URxvt*saveLines:                  5000
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines
