@@ -364,10 +364,7 @@
 
 ** atomic-chrome
     #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-      (setq
-       atomic-chrome-default-major-mode 'markdown-mode
-      )
-      (setq atomic-chrome-buffer-open-style 'full)
+      (setq atomic-chrome-buffer-open-style 'frame)
    #+END_SRC
 
 ** Web mode configuration and hooks
@@ -542,10 +539,12 @@
 ** Slack config
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
      (slack-register-team
-      :name "rocketmail"
+      :name "Asma Consulting"
       :default t
-      :client-id "402953958275.773306931700"
-      :client-secret "100bd115adf1855a7b200d78a5c4fe21"
-      :token "xoxp-402953958275-404124583127-762314377555-80e558d7a4605f5ae121d6c28ccaafe9")
+      :token (auth-source-pick-first-password
+              :host "asmaconsulting.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general, slackbot))
+      )
    #+END_SRC
 

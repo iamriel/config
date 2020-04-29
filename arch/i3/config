@@ -38,7 +38,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-# focus_follows_mouse no
+focus_follows_mouse yes
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $up k
@@ -171,7 +171,7 @@ bindsym $mod+Ctrl+less move workspace to output left
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
-assign [class="Google Chrome"] $ws2
+# assign [class="Google Chrome"] $ws2
 # assign [class="Pcmanfm"] $ws3
 
 # Open specific applications in floating mode
@@ -300,6 +300,10 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
 exec --no-startup-id ckb-next --background
 exec --no-startup-id xset r rate 185 100
+
+# Hide the mouse pointer if unused for a duration
+exec --no-startup-id /usr/bin/unclutter -b
+
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -393,7 +397,7 @@ bar {
 }
 
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
@@ -487,8 +491,9 @@ bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 
 ## Launch // Terminal // <Super> Enter ##
-bindsym $mod+Return exec terminal
-bindsym $mod+KP_Enter exec terminal
+set $tmux exec --no-startup-id "tmux has-session -t default && urxvt -e tmux attach -t default || urxvt -e tmux new -s default"
+bindsym $mod+Return $tmux
+bindsym $mod+KP_Enter $tmux
 
 # Launch // Program Launcher // <Mod> d
 bindsym $mod+d exec --no-startup-id dmenu_recency
@@ -511,6 +516,9 @@ bindsym $mod+s exec /usr/bin/slack
 
 ## Launch // System Settings Menu // <Mod><Ctrl> s ##
 bindsym $mod+Ctrl+s exec terminal -e 'bmenu'
+
+## Launch // Task Monitor // <mod><Ctrl><h> ##
+bindsym $mod+Ctrl+h exec terminal -e 'htop'
 
 ## Launch // File Manager // <Mod> F3
 bindsym $mod+F3 exec pcmanfm
@@ -554,3 +562,17 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 workspace "1:<span font_desc=\"Source Code Pro 12\"> 1 </span><span foreground=\"#81A1C1\"></span>" output HDMI2
 workspace "2:<span font_desc=\"Source Code Pro 12\"> 2 </span><span foreground=\"#88C0D0\"></span>" output HDMI2
 workspace "3:<span font_desc=\"Source Code Pro 12\"> 3 </span><span foreground=\"#A3BE8C\"></span>" output HDMI2
+
+######################################
+##                                  ##
+##            Marks / Go to         ##
+##                                  ##
+######################################
+# Marks/Goto
+# Read 1 character and mark the current window with this character
+# Mark: <mod> m <character> ##
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+# Goto: <mod> g <mark> ##
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '

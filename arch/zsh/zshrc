@@ -49,6 +49,7 @@ ZSH_THEME="spaceship"
 plugins=(
   archlinux
   nvm
+  sprunge
   vi-mode
   zsh-syntax-highlighting
   zsh-completions
@@ -74,10 +75,6 @@ fi
 
 if command -v phpenv 1>/dev/null 2>&1; then
   eval "$(phpenv init -)"
-fi
-
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach -t default || tmux new -s default
 fi
 
 # zprof

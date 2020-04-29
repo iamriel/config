@@ -122,6 +122,7 @@ This function should only modify configuration layer settings."
                                       all-the-icons
                                       atomic-chrome
                                       doom-themes
+                                      editorconfig
                                       graphql-mode
                                       jest
                                       prettier-js

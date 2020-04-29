@@ -65,9 +65,9 @@ interval=10
 #
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-[cpu_usage]
-interval=5
-min_width=100%
+# [cpu_usage]
+# interval=5
+# min_width=100%
 
 # Battery indicator
 #
