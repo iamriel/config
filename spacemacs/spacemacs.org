@@ -523,21 +523,33 @@
 
      (add-hook 'restclient-response-received-hook #'my-restclient-hook)
    #+END_SRC
-** Restclient
-   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     (defvar my-restclient-token nil)
-     (defun my-restclient-hook ()
-       "Update token from a request."
-       (save-excursion
-         (save-match-data
-           ;; update regexp to extract required data
-           (when (re-search-forward "\"token\":\"\\(.*?\\)\"" nil t)
-             (setq my-restclient-token (match-string 1))))))
-
-     (add-hook 'restclient-response-received-hook #'my-restclient-hook)
-   #+END_SRC
 ** Slack config
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     ;; native json
+     (defun my-slack-parse()
+       (json-parse-buffer :object-type 'plist
+                          :array-type 'list
+                          :null-object nil
+                          :false-object :json-false))
+
+     (defun my-slack-request-parse-payload (payload)
+       (condition-case err-var
+           (json-parse-string payload
+                              :object-type 'plist
+                              :array-type 'list
+                              :null-object nil
+                              :false-object :json-false)
+         (error (message "[Slack] Error on parse JSON: %S, ERR: %S"
+                         payload
+                         err-var)
+                nil)))
+
+     (when (fboundp 'json-parse-string)
+       (with-eval-after-load "slack-request"
+         (fset 'slack-parse 'my-slack-parse)
+         (fset 'slack-request-parse-payload 'my-slack-request-parse-payload)))
+
+
      (slack-register-team
       :name "Asma Consulting"
       :default t
@@ -545,6 +557,15 @@
               :host "asmaconsulting.slack.com"
               :user "me@iamriel.com")
       :subscribed-channels '((general, slackbot))
+      )
+
+     (slack-register-team
+      :name "Graphene"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "graphenetools.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general, django, random))
       )
    #+END_SRC
 
