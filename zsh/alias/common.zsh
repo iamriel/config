@@ -4,6 +4,11 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias e='emacsclient -nw'
 
+# git
+alias gfo='git fetch origin'
+alias gm='git merge'
+alias gri='git rebase -i'
+
 # Systemctl
 alias start_emacs='systemctl --user start emacs'
 alias stop_emacs='systemctl --user stop emacs'
@@ -11,10 +16,8 @@ alias stop_emacs='systemctl --user stop emacs'
 # Python/Django Aliases
 alias migrate="./manage.py migrate"
 alias runserver="./manage.py runserver"
-
 alias mm="./manage.py migrate"
 alias mr="./manage.py runserver"
-
 alias prunserver="pipenv run ./manage.py runserver"
 alias pshell="pipenv shell"
 alias mshell="./manage.py shell"

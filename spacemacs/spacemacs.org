@@ -477,6 +477,9 @@
 
 ** Variable settings and overrides
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (setq epg-gpg-program "/usr/bin/gpg2")
+     (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
      ;; Set default column view headings: Task Total-Time Time-Stamp
      (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
@@ -566,6 +569,46 @@
               :host "graphenetools.slack.com"
               :user "me@iamriel.com")
       :subscribed-channels '((general, django, random))
+      )
+
+
+     (slack-register-team
+      :name "Infosoft"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "infosoftstudio.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general))
+      )
+
+
+     (slack-register-team
+      :name "Datacue"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "datacueco.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general))
+      )
+
+
+     (slack-register-team
+      :name "Marketlight"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "marketlight.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general))
+      )
+
+
+     (slack-register-team
+      :name "Luspad 10"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "luspad10.slack.com"
+              :user "me@iamriel.com")
+      :subscribed-channels '((general))
       )
    #+END_SRC
 
