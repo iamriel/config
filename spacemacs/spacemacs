@@ -41,6 +41,15 @@ This function should only modify configuration layer settings."
      docker
      emacs-lisp
      epub
+     (erc :variables
+          erc-server-list '(("irc.freenode.net"
+                             :port "6697"
+                             :ssl t
+                             :nick "iamriel"
+                             :password (auth-source-pick-first-password
+                                        :host "irc.freenode.net"
+                                        :user "iamriel")))
+          erc-autojoin-channels-alist '(("freenode.net" "#django" "#emacs" "#python")))
      git
      github
      go
@@ -55,7 +64,6 @@ This function should only modify configuration layer settings."
      ruby
      rust
      search-engine
-     slack
      spotify
      sql
      systemd
@@ -99,7 +107,12 @@ This function should only modify configuration layer settings."
             shell-default-term-shell "/usr/bin/zsh"
             shell-default-height 50
             shell-default-position 'top)
-     ;; (spell-checking :variables spell-checking-enable-by-default nil)
+     (slack :variables
+            slack-file-dir (let ((dir "~/Downloads/slack-files/"))
+                             (unless (file-exists-p dir)
+                               (make-directory dir t))
+                             dir))
+     (spell-checking :variables spell-checking-enable-by-default nil)
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (typescript :variables
                  node-add-modules-path t

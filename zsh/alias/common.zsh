@@ -5,9 +5,11 @@ alias pbpaste='xclip -selection clipboard -o'
 alias e='emacsclient -nw'
 
 # git
+alias gf='git fetch'
 alias gfo='git fetch origin'
 alias gm='git merge'
 alias gri='git rebase -i'
+alias gc='git checkout'
 
 # Systemctl
 alias start_emacs='systemctl --user start emacs'
