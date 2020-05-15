@@ -4,6 +4,8 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias e='emacsclient -nw'
 
+alias pacupdatelist='sudo pacman -Qqe > ~/projects/config/arch/pkglist.txt'
+
 # git
 alias gf='git fetch'
 alias gfo='git fetch origin'

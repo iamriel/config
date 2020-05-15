@@ -203,6 +203,9 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
+for_window [title="^Android Emulator -"] floating enable
+for_window [title="^XMind$"] floating enable
+
 for_window [window_role="pop-up"] floating enable
 for_window [class="zoom" instance="zoom"] floating enable
 for_window [instance="gimp"] floating enable

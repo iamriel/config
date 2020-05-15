@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
      copy-as-format
      csv
      django
+     dap
      docker
      emacs-lisp
      epub
@@ -133,15 +134,18 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       all-the-icons
                                       atomic-chrome
-                                      doom-themes
                                       editorconfig
                                       graphql-mode
                                       jest
                                       prettier-js
                                       rjsx-mode
-                                      nord-theme
+
+                                      ;; themes
+                                      doom-themes
                                       dracula-theme
+                                      nord-theme
                                       base16-theme
+
                                       (no-littering :location (recipe :fetcher github :repo "emacscollective/no-littering"))
                                       (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       )
@@ -275,6 +279,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          nord
+                         doom-material
                          dracula
                          doom-spacegrey
                          doom-nord
@@ -584,7 +589,6 @@ before packages are loaded."
   (load-file (concat default-directory ".user-config.el"))
 
   (require 'atomic-chrome)
-  (require 'dap-chrome)
 
   (atomic-chrome-start-server)
 
