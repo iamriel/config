@@ -65,9 +65,7 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-source <(cat ~/.oh-my-zsh/custom/alias/*)
-
-eval `dircolors ~/.dir_colors`
+# source <(cat ~/.oh-my-zsh/custom/alias/*)
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
