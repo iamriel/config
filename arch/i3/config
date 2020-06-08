@@ -209,6 +209,7 @@ for_window [title="^XMind$"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="zoom" instance="zoom"] floating enable
 for_window [instance="gimp"] floating enable
+for_window [title="Microsoft Teams Notification"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus

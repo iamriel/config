@@ -170,6 +170,7 @@
 
      (setq leetcode-prefer-language "python3")
      (setq leetcode-prefer-sql "mysql")
+     (setq flycheck-javascript-eslint-executable "eslint_d")
 
      ;; (with-eval-after-load 'python
      ;;   (defun python-shell-completion-native-try ()
@@ -477,7 +478,7 @@
 
 ** Variable settings and overrides
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     ;; (setq epg-gpg-program "/usr/bin/gpg2")
+     (setq epg-gpg-program "/usr/bin/gpg")
      ;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
 
      ;; Set default column view headings: Task Total-Time Time-Stamp

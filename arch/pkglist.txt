@@ -123,7 +123,7 @@ lib32-libxslt
 lib32-mesa-demos
 lib32-mesa-vdpau
 lib32-mpg123
-lib32-nvidia-390xx-utils
+lib32-nvidia-418xx-utils
 lib32-ocl-icd
 lib32-primus
 lib32-sqlite
@@ -140,7 +140,7 @@ lightdm-settings
 lightdm-slick-greeter
 linux56
 linux56-bbswitch
-linux56-nvidia-390xx
+linux56-nvidia-418xx
 logrotate
 lvm2
 lxappearance
@@ -195,7 +195,7 @@ noto-fonts-emoji
 nss-mdns
 ntfs-3g
 ntp
-nvidia-390xx-utils
+nvidia-418xx-utils
 nvidia-container-toolkit
 nvm
 ocl-icd
@@ -258,6 +258,7 @@ systemd
 systemd-fsck-silent
 systemd-sysvcompat
 tar
+teams
 terminus-font
 tesseract
 tesseract-data-eng
@@ -266,7 +267,6 @@ tk
 tlp
 tmux
 tree
-ttf-all-the-icons
 ttf-bitstream-vera
 ttf-dejavu
 ttf-droid
@@ -326,5 +326,6 @@ xterm
 xz
 yay
 zensu
+zget
 zoom
 zsh

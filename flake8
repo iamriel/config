@@ -27,6 +27,8 @@ ignore =
     E128,
     # E124: Closing bracket does not match visual indentation
     E124,
+    # E231: E231 missing whitespace after ','
+    E231
     # E501: Line too long (82 > 79 characters)
     E501
     # W503: Line break before binary operator (conflict with black)

@@ -99,6 +99,7 @@ This function should only modify configuration layer settings."
      (python :variables
              python-shell-completion-native-enable t
              python-backend 'lsp
+             python-lsp-server 'mspyls
              python-formatter 'black
              python-test-runner 'pytest)
      (restclient :variables
