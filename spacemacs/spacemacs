@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
           lsp-pyls-plugins-jedi-completion-include-params nil
           )
      (org :variables
+          org-enable-reveal-js-support t
           org-confirm-babel-evaluate nil)
      (node :variables node-add-modules-path t)
      (php :variables

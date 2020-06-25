@@ -48,6 +48,7 @@ docker-compose
 dosfstools
 downgrade
 e2fsprogs
+earlyoom
 ecryptfs-utils
 editorconfig-core-c
 efibootmgr
@@ -172,6 +173,7 @@ mesa-demos
 mesa-vdpau
 mhwd
 mhwd-db
+microsoft-python-language-server
 mkinitcpio-openswap
 mlocate
 mobile-broadband-provider-info

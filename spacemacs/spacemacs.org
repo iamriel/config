@@ -163,6 +163,9 @@
            (setq my:theme-terminal-loaded t)))
        )
 
+
+     (setq bidi-paragraph-direction 'left-to-right)
+     (setq bidi-inhibit-bpa t)
      (setq history-length 100)
      (put 'minibuffer-history 'history-length 50)
      (put 'evil-ex-history 'history-length 50)
@@ -206,6 +209,7 @@
      (when (version<= "9.2" (org-version))
        (require 'org-tempo))
 
+     (setq org-re-reveal-root "file:///home/light/projects/open_source/reveal.js")
      (setq org-babel-python-command "python3")
 
      (defun my-babel-to-buffer ()
@@ -560,6 +564,15 @@
       :token (auth-source-pick-first-password
               :host "asmaconsulting.slack.com"
               :user "me@iamriel.com")
+      :subscribed-channels '((general, slackbot))
+      )
+
+     (slack-register-team
+      :name "Kizen"
+      :default t
+      :token (auth-source-pick-first-password
+              :host "kizendev.slack.com"
+              :user "riel@kizen.com")
       :subscribed-channels '((general, slackbot))
       )
 

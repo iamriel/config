@@ -478,8 +478,8 @@ mode "$mode_gaps_outer" {
 ##                                      ##
 ##########################################
 
-## Fix mouse // <mod> Shift m ##
-bindsym $mod+Shift+m exec --no-startup-id ~/.scripts/re-enable-mouse.sh
+## Launch Turing Workspace
+bindsym $mod+Shift+t exec --no-startup-id /usr/local/bin/turing.AppImage
 
 set_from_resource $rofiTheme rofi.theme "rofi"
 
