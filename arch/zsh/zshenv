@@ -1,6 +1,13 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
+export PYENV_ROOT=$HOME/.pyenv
+export PYTHON_VERSION=3.6.10
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_INSTALL_TIMEOUT=9999
+
 export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_SCRIPT=$PYENV_ROOT/shims/virtualenvwrapper.sh
 export EDITOR="emacsclient -t"
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
@@ -8,15 +15,6 @@ export NVM_DIR=$HOME/.nvm
 export NODE_VERSION=v12.16.1
 export PHPENV_ROOT=$HOME/.phpenv
 export RBENV_ROOT=$HOME/.rbenv
-
-export GOENV_ROOT=$HOME/.goenv
-export GOENV_VERSION=1.11.4
-export GOPATH=$HOME/gopath/$GOENV_VERSION
-
-export PYENV_ROOT=$HOME/.pyenv
-export PYTHON_VERSION=3.6.10
-export PIPENV_IGNORE_VIRTUALENVS=1
-export PIPENV_INSTALL_TIMEOUT=9999
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -48,15 +46,8 @@ path=(
   /{bin,sbin}
   $HOME/.scripts
   $NVM_DIR/versions/node/$NODE_VERSION/bin
-  $GOPATH/bin
   $PHPENV_ROOT/{bin,shims}
-  $GOENV_ROOT/{bin,shims}
   $PYENV_ROOT/{bin,shims}
   $RBENV_ROOT/bin
   $path
 )
-
-for path_file in /etc/paths.d/*(.N); do
-  path+=($(<$path_file))
-done
-unset path_file

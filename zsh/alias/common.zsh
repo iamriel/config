@@ -6,6 +6,8 @@ alias e='emacsclient -nw'
 
 alias pacupdatelist='sudo pacman -Qqe > ~/projects/config/arch/pkglist.txt'
 
+alias ktest='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py test -k --exclude-tag slow'
+
 # git
 alias gf='git fetch'
 alias gfo='git fetch origin'

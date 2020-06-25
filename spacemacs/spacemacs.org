@@ -92,6 +92,9 @@
    
 ** Python shell interpreter fix
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
+     ;; (setq python-auto-set-local-pyenv-version 'on-project-switch)
+     ;; (setq python-auto-set-local-pyvenv-virtualenv 'on-project-switch)
+
      (with-eval-after-load 'python
        (defun python-shell-completion-native-try ()
          "Return non-nil if can trigger native completion."
@@ -175,16 +178,6 @@
      (setq leetcode-prefer-sql "mysql")
      (setq flycheck-javascript-eslint-executable "eslint_d")
 
-     ;; (with-eval-after-load 'python
-     ;;   (defun python-shell-completion-native-try ()
-     ;;     "Return non-nil if can trigger native completion."
-     ;;     (let ((python-shell-completion-native-enable t)
-     ;;           (python-shell-completion-native-output-timeout
-     ;;            python-shell-completion-native-try-output-timeout))
-     ;;       (python-shell-completion-native-get-completions
-     ;;        (get-buffer-process (current-buffer))
-     ;;        nil "_"))))
-
      (eval-after-load 'typescript-mode
        '(add-hook 'typescript-mode-hook #'add-node-modules-path))
    #+END_SRC
@@ -195,11 +188,11 @@
      ;;                               (setq lsp-pyls-configuration-sources ["flake8"]
      ;;                                     lsp-pyls-plugins-pylint-enabled nil
      ;;                                     lsp-pyls-plugins-jedi-completion-include-params nil)))
-     (defun lsp-set-cfg ()
-       (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
-         ;; TODO: check lsp--cur-workspace here to decide per server / project
-         (lsp--set-configuration lsp-cfg)))
-     (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg)
+     ;; (defun lsp-set-cfg ()
+     ;;   (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
+     ;;     ;; TODO: check lsp--cur-workspace here to decide per server / project
+     ;;     (lsp--set-configuration lsp-cfg)))
+     ;; (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg)
    #+END_SRC
   
 ** Org mode configuration and hooks
