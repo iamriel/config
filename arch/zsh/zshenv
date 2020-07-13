@@ -7,8 +7,9 @@ export PIPENV_IGNORE_VIRTUALENVS=1
 export PIPENV_INSTALL_TIMEOUT=9999
 
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_SCRIPT=$PYENV_ROOT/shims/virtualenvwrapper.sh
-export EDITOR="emacsclient -t"
+export VIRTUALENVWRAPPER_SCRIPT=/usr/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=$PYENV_ROOT/shims/python
+export EDITOR=vim
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 export NVM_DIR=$HOME/.nvm

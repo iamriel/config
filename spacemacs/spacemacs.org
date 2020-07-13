@@ -184,10 +184,10 @@
    
 ** LSP
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     ;; (add-hook 'python-mode-hook (lambda()
-     ;;                               (setq lsp-pyls-configuration-sources ["flake8"]
-     ;;                                     lsp-pyls-plugins-pylint-enabled nil
-     ;;                                     lsp-pyls-plugins-jedi-completion-include-params nil)))
+     (add-hook 'python-mode-hook (lambda()
+                                   (setq lsp-pyls-configuration-sources ["flake8"]
+                                         lsp-pyls-plugins-pylint-enabled nil
+                                         lsp-pyls-plugins-jedi-completion-include-params nil)))
      ;; (defun lsp-set-cfg ()
      ;;   (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
      ;;     ;; TODO: check lsp--cur-workspace here to decide per server / project
@@ -370,6 +370,8 @@
    Enable web-mode for the following files and add default offset
 
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     (setq web-mode-enable-auto-pairing nil)
+
      (add-to-list 'auto-mode-alist '("\\.blade\\." . web-mode))
      ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 

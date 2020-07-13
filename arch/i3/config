@@ -210,6 +210,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="zoom" instance="zoom"] floating enable
 for_window [instance="gimp"] floating enable
 for_window [title="Microsoft Teams Notification"] floating enable
+for_window [title="Turing_Workspace"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -296,7 +297,6 @@ bindsym $mod+9 exec --no-startup-id blurlock
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 # exec --no-startup-id pamac-tray
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id ~/.scripts/startup.sh
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id start_conky_maia
 exec --no-startup-id nm-applet

@@ -3,7 +3,7 @@
 
 # Add my 'web' type.
 --type-add
-web:*.{html,css,js}*
+web:*.{html,css,js,vue}*
 
 # Set the colors.
 # --colors=line:none

@@ -6,7 +6,11 @@ alias e='emacsclient -nw'
 
 alias pacupdatelist='sudo pacman -Qqe > ~/projects/config/arch/pkglist.txt'
 
+# Kizen
 alias ktest='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py test -k --exclude-tag slow'
+alias kshell='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py shell_plus'
+alias kbash='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com bash'
+alias kmanage='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py'
 
 # git
 alias gf='git fetch'
@@ -40,7 +44,6 @@ nr() {
     #do things with parameters like $1 such as
     npm run "$1"
 }
-
 
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder;"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder"
