@@ -138,6 +138,7 @@ This function should only modify configuration layer settings."
                                       atomic-chrome
                                       editorconfig
                                       graphql-mode
+                                      github-review
                                       jest
                                       prettier-js
                                       rjsx-mode
