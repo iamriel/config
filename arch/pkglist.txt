@@ -22,6 +22,7 @@ bison
 blueman
 bluez-utils
 bmenu
+bpclient
 btrfs-progs
 bumblebee
 bzip2
@@ -34,6 +35,7 @@ cpupower
 crda
 cronie
 cryptsetup
+debtap
 deluge
 device-mapper
 dfc
@@ -46,6 +48,7 @@ dmraid
 docker
 docker-compose
 dosfstools
+dotnet-sdk-3.0
 downgrade
 e2fsprogs
 earlyoom
@@ -96,6 +99,7 @@ gvfs-gphoto2
 gvfs-mtp
 gvfs-smb
 gzip
+heroku-cli
 hexchat
 htop
 i3blocks
@@ -173,7 +177,7 @@ mesa-demos
 mesa-vdpau
 mhwd
 mhwd-db
-microsoft-python-language-server
+microsoft-python-language-server-git
 mkinitcpio-openswap
 mlocate
 mobile-broadband-provider-info
@@ -216,16 +220,17 @@ patchutils
 pavucontrol
 pciutils
 pcmanfm
+peek
 perl
 perl-file-mimeinfo
 php-fpm
 php-sqlite
 phpenv-git
-pi-hole-server
 pkgconf
 polkit-gnome
 poppler-data
 postgresql-libs
+postman
 powertop
 procps-ng
 psmisc
@@ -234,6 +239,7 @@ pyenv
 pygtk
 python-black
 python-mysqlclient
+python-virtualenvwrapper
 qt5-styleplugins
 qt5ct
 ranger
@@ -242,17 +248,19 @@ ripgrep
 rofi
 rsync
 ruby-build
-rxvt-unicode-truecolor
+rxvt-unicode-patched-with-truecolor
 s-nail
 sbxkb
 screenfetch
 sed
 shadow
+skypeforlinux-preview-bin
 spectre-meltdown-checker
 speedtest-cli
 sqlfmt-bin
 subversion
 sudo
+swig
 sysfsutils
 syslog-ng
 sysstat
@@ -278,6 +286,7 @@ ttf-liberation
 ttf-material-design-icons-webfont
 ttf-menlo-powerline-git
 unclutter
+unzip
 upower
 urxvt-resize-font-git
 usbutils
@@ -329,5 +338,6 @@ xz
 yay
 zensu
 zget
+zip
 zoom
 zsh

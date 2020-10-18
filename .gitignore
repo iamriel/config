@@ -1,3 +1,5 @@
 .DS_STORE
 .user-config.el
 .user-init.el
+config.el
+custom.el

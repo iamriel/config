@@ -92,8 +92,8 @@
    
 ** Python shell interpreter fix
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-init.el
-     ;; (setq python-auto-set-local-pyenv-version 'on-project-switch)
-     ;; (setq python-auto-set-local-pyvenv-virtualenv 'on-project-switch)
+     ;; (setq python-auto-set-local-pyenv-version 'on-visit)
+     ;; (setq python-auto-set-local-pyvenv-virtualenv 'on-visit)
 
      (with-eval-after-load 'python
        (defun python-shell-completion-native-try ()
@@ -184,15 +184,18 @@
    
 ** LSP
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
-     (add-hook 'python-mode-hook (lambda()
-                                   (setq lsp-pyls-configuration-sources ["flake8"]
-                                         lsp-pyls-plugins-pylint-enabled nil
-                                         lsp-pyls-plugins-jedi-completion-include-params nil)))
+     ;; (add-hook 'python-mode-hook (lambda()
+     ;;                               (setq lsp-pyls-configuration-sources ["flake8"]
+     ;;                                     lsp-pyls-plugins-pylint-enabled nil
+     ;;                                     lsp-pyls-plugins-jedi-completion-include-params nil)))
      ;; (defun lsp-set-cfg ()
      ;;   (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
      ;;     ;; TODO: check lsp--cur-workspace here to decide per server / project
      ;;     (lsp--set-configuration lsp-cfg)))
      ;; (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg)
+
+     (setq lsp-auto-guess-root t)
+     (setq python-shell-prompt-detect-failure-warning nil)
    #+END_SRC
   
 ** Org mode configuration and hooks
@@ -260,10 +263,17 @@
       ;; Todo list with schedule and deadline
       ;; http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/
       (setq org-capture-templates
-            '(("t" "todo" entry (file+headline
+            '(
+              ("t" "todo" entry (file+headline
                                  "~/Org Files/agenda/gtd.org"
                                  "Tasks")
-               "* TODO [#C] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n")))
+               "* TODO [#C] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n")
+              ("s" "Standup" entry (file+headline
+                                 "~/Org Files/agenda/gtg.org"
+                                 "Standup")
+
+               "* TODO %(org-insert-time-stamp (org-read-date nil t \"+0d\")) Standup\n1. What I did until this standup:\n%a\n2. What I will do after standup:\n%a\n3. What I reviewed:\n%a\n4. What needs to be reviewed:\n%a ")
+              ))
 
       (setq org-outline-path-complete-in-steps nil)
       (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
@@ -525,6 +535,83 @@
              (setq my-restclient-token (match-string 1))))))
 
      (add-hook 'restclient-response-received-hook #'my-restclient-hook)
+   #+END_SRC
+** Mu4e
+   #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
+     ;;; Set up some common mu4e variables
+     (setq mu4e-maildir "~/.mail"
+           mu4e-get-mail-command "mbsync -a"
+           mu4e-update-interval nil
+           mu4e-compose-signature-auto-include nil
+           mu4e-view-show-images t
+           mu4e-view-show-addresses t
+           mu4e-get-mail-command "offlineimap"
+           ;; don't keep message buffers around
+           message-kill-buffer-on-exit t
+           mu4e-index-cleanup nil      ;; don't do a full cleanup check
+           mu4e-index-lazy-check t    ;; don't consider up-to-date dirs
+           )
+
+     ;; don't save message to Sent Messages, GMail/IMAP will take care of this
+     (setq mu4e-sent-messages-behavior 'delete)
+
+     ;;; Mail directory shortcuts
+     (setq mu4e-maildir-shortcuts
+           '(("/iamriel/INBOX" . ?i)
+             ("/kizen/INBOX" . ?k)
+             ("/turing/INBOX" . ?t)
+             ("/[Gmail].Drafts" . ?d)
+             ("/[Gmail].Sent Mail" . ?s)
+             ))
+
+
+     (setq mu4e-contexts `(,(make-mu4e-context :name "iamriel"
+                                               :enter-func (lambda ()
+                                                             (mu4e-message "Switch to iamriel")):match-func
+                                               (lambda (msg)
+                                                 (when msg
+                                                   (mu4e-message-contact-field-matches msg :to "me@iamriel.com")))
+                                               :vars '((user-mail-address . "me@iamriel.com")
+                                                       (user-full-name . "Rieljun Liguid")
+                                                       (smtpmail-smtp-user . "me@iamriel.com")
+                                                       (smtpmail-smtp-server . "smtp.gmail.com")
+                                                       (smtpmail-stream-type . ssl)
+                                                       (smtpmail-smtp-service . 465)))
+                           ,(make-mu4e-context :name "kizen"
+                                               :enter-func (lambda ()
+                                                             (mu4e-message "Switch to Kizen")):match-func
+                                               (lambda (msg)
+                                                 (when msg
+                                                   (mu4e-message-contact-field-matches msg :to "riel@kizen.com")))
+                                               :vars '((user-mail-address . "riel@kizen.com")
+                                                       (user-full-name . "Rieljun Liguid")
+                                                       (smtpmail-smtp-user . "riel@kizen.com")
+                                                       (smtpmail-smtp-server . "smtp.gmail.com")
+                                                       (smtpmail-stream-type . ssl)
+                                                       (smtpmail-smtp-service . 465)))
+                           ,(make-mu4e-context :name "turing"
+                                               :enter-func (lambda ()
+                                                             (mu4e-message "Switch to Turing")):match-func
+                                               (lambda (msg)
+                                                 (when msg
+                                                   (mu4e-message-contact-field-matches msg :to "rieljun.l@turing.com")))
+                                               :vars '((user-mail-address . "rieljun.l@turing.com")
+                                                       (user-full-name . "Rieljun Liguid")
+                                                       (smtpmail-smtp-user . "rieljun.l@turing.com")
+                                                       (smtpmail-smtp-server . "smtp.gmail.com")
+                                                       (smtpmail-stream-type . ssl)
+                                                       (smtpmail-smtp-service . 465)))
+                           ))
+
+     ;; This sets `mu4e-user-mail-address-list' to the concatenation of all
+     ;; `user-mail-address' values for all contexts. If you have other mail
+     ;; addresses as well, you'll need to add those manually.
+     (setq mu4e-user-mail-address-list
+           (delq nil
+                 (mapcar (lambda (context)
+                           (when (mu4e-context-vars context)
+                             (cdr (assq 'user-mail-address (mu4e-context-vars context)))))
+                         mu4e-contexts)))
    #+END_SRC
 ** Slack config
    #+BEGIN_SRC emacs-lisp :tangle ~/.user-config.el
