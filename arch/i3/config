@@ -516,6 +516,9 @@ bindsym $mod+e exec --no-startup-id emacsclient -nc
 ## Launch // Emacs // <mod><Shift> e ##
 bindsym $mod+Shift+e exec emacs
 
+## Launch // Emacs // <mod><Ctrl> e ##
+bindsym $mod+Ctrl+e exec ~/.emacs_anywhere/bin/run
+
 ## Launch // Slack // <mod> s ##
 bindsym $mod+s exec /usr/bin/slack
 
