@@ -304,7 +304,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
 # exec --no-startup-id ckb-next --background
 exec --no-startup-id xset r rate 185 100
-exec --no-startup-id setxkbmap -option ctrl:swapcaps
+# exec --no-startup-id setxkbmap -option ctrl:swapcaps
 
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
