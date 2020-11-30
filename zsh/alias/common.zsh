@@ -5,12 +5,14 @@ alias pbpaste='xclip -selection clipboard -o'
 alias e='emacsclient -nw'
 
 alias pacupdatelist='sudo pacman -Qqe > ~/projects/config/arch/pkglist.txt'
+alias keeb='source ~/.scripts/keyboard.sh'
 
 # Kizen
 alias ktest='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py test -k --exclude-tag slow'
 alias kshell='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py shell_plus'
 alias kbash='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com bash'
 alias kmanage='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py'
+alias kpdb="docker attach $(docker ps | grep local | awk '{ print $1 }')"
 
 # git
 alias gf='git fetch'

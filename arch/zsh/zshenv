@@ -45,6 +45,7 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
+  $HOME/.doom-emacs/bin
   $HOME/.scripts
   $NVM_DIR/versions/node/$NODE_VERSION/bin
   $PHPENV_ROOT/{bin,shims}
