@@ -16,6 +16,7 @@ conky.config = {
 	own_window_transparent = true,
 	update_interval = 2.0,
 	use_xft = true,
+    xinerama_head = 1,
 }
 conky.text = [[
 ${color2}open new terminal - ${color}mod+Enter
