@@ -34,6 +34,9 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
+# Mouse key repeat
+bindsym $mod+Ctrl+x exec xset r rate 185 100
+
 # Screen brightness controls
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
@@ -225,7 +228,7 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
 
 ## Session // Reboot // <Super><Shift> b ##
-bindsym $mod+Shift+b exec reboot
+# bindsym $mod+Shift+b exec reboot
 
 ## Session // Power Down // <Super><Shift> p ##
 bindsym $mod+Shift+p exec shutdown
@@ -401,8 +404,8 @@ bar {
     }
 }
 
-# hide/unhide i3status bar
-# bindsym $mod+m bar mode toggle
+# Hide/Show i3status bar <Super> b ##
+bindsym $mod+b bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
@@ -543,8 +546,8 @@ bindsym Print exec --no-startup-id flameshot screen -p $flameshot_dir
 bindsym Shift+Print exec --no-startup-id flameshot gui -p $flameshot_dir
 # bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
-## Launch // Bluetooth Manager // <Mod> b
-bindsym $mod+b exec blueman-manager
+## Launch // Bluetooth Manager // <Mod><Shift> b
+bindsym $mod+Shift+b exec blueman-manager
 
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
@@ -567,9 +570,9 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 ##        Workspace Monitor         ##
 ##                                  ##
 ######################################
-workspace "1:<span font_desc=\"Source Code Pro 12\"> 1 </span><span foreground=\"#81A1C1\"></span>" output HDMI2
-workspace "2:<span font_desc=\"Source Code Pro 12\"> 2 </span><span foreground=\"#88C0D0\"></span>" output HDMI2
-workspace "3:<span font_desc=\"Source Code Pro 12\"> 3 </span><span foreground=\"#A3BE8C\"></span>" output HDMI2
+workspace "1:<span font_desc=\"Source Code Pro 12\"> 1 </span><span foreground=\"#81A1C1\"></span>" output DP2
+workspace "2:<span font_desc=\"Source Code Pro 12\"> 2 </span><span foreground=\"#88C0D0\"></span>" output DP2
+workspace "3:<span font_desc=\"Source Code Pro 12\"> 3 </span><span foreground=\"#A3BE8C\"></span>" output DP2
 
 ######################################
 ##                                  ##
