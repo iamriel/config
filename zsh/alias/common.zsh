@@ -6,6 +6,8 @@ alias e='emacsclient -nw'
 
 alias pacupdatelist='sudo pacman -Qqe > ~/projects/config/arch/pkglist.txt'
 alias keeb='source ~/.scripts/keyboard.sh'
+alias docker_pihole='source ~/.scripts/pihole/docker_run.sh'
+alias build_emacs='source ~/.scripts/emacs/build.sh'
 
 # Kizen
 alias ktest='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py test -k --exclude-tag slow'
