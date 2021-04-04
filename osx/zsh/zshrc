@@ -47,7 +47,7 @@ SPACESHIP_DIR_TRUNC_REPO=false
 
 ZSH_THEME="spaceship"
 plugins=(
-  archlinux
+  # archlinux
 #  nvm
   sprunge
   vi-mode
@@ -65,13 +65,10 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
-source <(cat ~/.oh-my-zsh/custom/alias/*)
+source <(cat ~/.oh-my-zsh/custom/alias/common/*)
+source ~/.oh-my-zsh/custom/alias/osx.zsh
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
-fi
-
-if command -v phpenv 1>/dev/null 2>&1; then
-  eval "$(phpenv init -)"
 fi
 # zprof

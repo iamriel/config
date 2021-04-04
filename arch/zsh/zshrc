@@ -66,6 +66,7 @@ done
 compinit -C
 
 source <(cat ~/.oh-my-zsh/custom/alias/*)
+source ~/.oh-my-zsh/custom/alias/arch.zsh
 
 eval `dircolors ~/.dir_colors`
 

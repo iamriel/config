@@ -40,10 +40,9 @@ unset path_file
 # Set the list of directories that Zsh searches for programs.
 path=(
   $NVM_DIR/versions/node/$NODE_VERSION/bin
-  $PHPENV_ROOT/{bin,shims}
-  $GOENV_ROOT/{bin,shims}
   $PYENV_ROOT/{bin,shims}
   $RBENV_ROOT/bin
+  $HOME/.emacs.d/bin
   /usr/local/opt/mysql-client/bin
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
