@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : mgetters
-#key : mgetters
-#contributor : riel
-# --
-...mapGetters('$1', ['$2'])$0

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : fwrite
-#key : fwrite
-#contributor : Rieljun
-# --
-fwrite(STDERR, print_r($1, true));$0

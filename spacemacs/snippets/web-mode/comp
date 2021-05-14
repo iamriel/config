@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : comp
-#key : comp
-#contributor : riel
-# --
-components: {
-  $1
-}$0

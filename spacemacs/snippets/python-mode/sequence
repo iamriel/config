@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : sequence
-#key : sequence
-#contributor : riel
-# --
-${1:field_name} = factory.Sequence(lambda n: f"$2")$0

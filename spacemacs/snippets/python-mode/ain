@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : ain
-#key : ain
-#contributor : Rieljun Liguid
-# --
-self.assertIsNone($0)

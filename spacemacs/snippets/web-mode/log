@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : log
-#key : log
-#contributor : Rieljun Liguid
-# --
-console.log($1)$0

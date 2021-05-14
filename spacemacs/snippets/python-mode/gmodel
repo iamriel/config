@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : gmodel
-#key : gmodel
-#contributor : Rieljun Liguid
-# --
-$1 = apps.get_model('$2', '$0')

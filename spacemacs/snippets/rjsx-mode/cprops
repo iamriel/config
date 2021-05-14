@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : cprops
-#key : cprops
-#contributor : riel
-# --
-const {$1} = ${2:this.props};$0

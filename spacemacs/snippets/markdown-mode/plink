@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : plink
-#key : plink
-#contributor : Rieljun Liguid
-# --
-[$1](https://www.pivotaltracker.com/story/show/$1)$0

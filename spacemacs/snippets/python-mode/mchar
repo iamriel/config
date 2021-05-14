@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : models.CharField
-#key : mchar
-#contributor : Rieljun
-# --
-${1:field_name} = models.CharField(max_length=${2:255})$0

@@ -90,8 +90,8 @@ bindsym $mod+f fullscreen toggle
 # Toggle // tiling / floating // <mod><Shift> f
 bindsym $mod+Shift+f floating toggle
 
-## Modify // Window Layout Mode // <mod> t ##
-bindsym $mod+t layout toggle tabbed splith splitv
+## Modify // Window Layout Mode // <mod><Shift> t ##
+bindsym $mod+Shift+t layout toggle tabbed splith splitv
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
@@ -405,7 +405,7 @@ bar {
 }
 
 # Hide/Show i3status bar <Super> b ##
-bindsym $mod+b bar mode toggle
+# bindsym $mod+b bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
@@ -483,7 +483,7 @@ mode "$mode_gaps_outer" {
 ##########################################
 
 ## Launch Turing Workspace
-bindsym $mod+Shift+t exec --no-startup-id /usr/local/bin/turing.AppImage
+# bindsym $mod+Shift+t exec --no-startup-id /usr/local/bin/turing.AppImage
 
 set_from_resource $rofiTheme rofi.theme "rofi"
 
@@ -513,17 +513,20 @@ bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Shift+Return exec default_browser
 bindsym $mod+Shift+KP_Enter exec default_browser
 
-## Launch // Emacsclient // <mod> e ##
-bindsym $mod+e exec --no-startup-id emacsclient -nc
-
 ## Launch // Emacs // <mod><Shift> e ##
-bindsym $mod+Shift+e exec emacs
+bindsym $mod+e exec emacs
+
+## Launch // Emacsclient // <mod> e ##
+bindsym $mod+Shift+e exec --no-startup-id emacsclient -nc
 
 ## Launch // Emacs // <mod><Ctrl> e ##
 bindsym $mod+Ctrl+e exec ~/.emacs_anywhere/bin/run
 
 ## Launch // Slack // <mod> s ##
 bindsym $mod+s exec /usr/bin/slack
+##
+## Launch // Telegram // <mod> t ##
+bindsym $mod+t exec /usr/bin/telegram-desktop
 
 ## Launch // System Settings Menu // <Mod><Ctrl> s ##
 bindsym $mod+Ctrl+s exec terminal -e 'bmenu'

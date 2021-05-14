@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : model_viewset
-#key : model_viewset
-#contributor : Rieljun Liguid
-# --
-class ${1:Model}ViewSet(ModelViewSet):
-    serializer_class = $1Serializer
-    queryset = $1.objects.all()

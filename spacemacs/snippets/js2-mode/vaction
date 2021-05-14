@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : vaction
-#key : vaction
-#contributor : Rieljun Liguid
-# --
-export const $1 = ({ ${2:commit, dispatch, state} }) => {
-  $0
-}

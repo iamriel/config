@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : graphene.Field
-#key : gfield
-#contributor : Rieljun
-# --
-${1:field} = graphene.Field(${2:Type})$0

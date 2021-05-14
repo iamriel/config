@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : psol
-#key : psol
-#contributor : Rieljun
-# --
-sol = Solution()
-print(sol.$1($2))
-$0

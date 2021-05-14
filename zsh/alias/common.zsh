@@ -15,6 +15,10 @@ alias kshell='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa
 alias kbash='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com bash'
 alias kmanage='cd ~/projects/kizen/hapi-api; docker-compose exec app.local.evosqa.com ./manage.py'
 alias kpdb="docker attach $(docker ps | grep local | awk '{ print $1 }')"
+alias pods_staging='kubectl -n staging get pods'
+alias pods_int='kubectl -n integration get pods'
+alias bash_staging="kubectl -n staging exec -ti $(kubectl -n staging get pods | grep webapp-worker | awk '{ print $1 }') -- bash"
+alias bash_int="kubectl -n integration exec -ti $(kubectl -n integration get pods | grep webapp-worker | awk '{ print $1 }') -- bash"
 
 # git
 alias gf='git fetch'
