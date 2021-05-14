@@ -10,7 +10,7 @@ export PHPENV_ROOT=$HOME/.phpenv
 export RBENV_ROOT=$HOME/.rbenv
 
 export PYENV_ROOT=$HOME/.pyenv
-export PYTHON_VERSION=3.6.10
+export PYTHON_VERSION=3.7.7
 export PIPENV_IGNORE_VIRTUALENVS=1
 export PIPENV_INSTALL_TIMEOUT=9999
 
@@ -39,16 +39,14 @@ unset path_file
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  $NVM_DIR/versions/node/$NODE_VERSION/bin
+  $PYENV_ROOT/{bin,shims}
+  $RBENV_ROOT/bin
+  $HOME/.emacs.d/bin
   /usr/local/opt/mysql-client/bin
-
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
-  $NVM_DIR/versions/node/$NODE_VERSION/bin
-  $PHPENV_ROOT/{bin,shims}
-  $GOENV_ROOT/{bin,shims}
-  $PYENV_ROOT/{bin,shims}
-  $RBENV_ROOT/bin
   $path
 )
 
