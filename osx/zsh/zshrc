@@ -41,14 +41,12 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 SPACESHIP_CHAR_SYMBOL="❯ "
-SPACESHIP_VI_MODE_COLOR="black"
+SPACESHIP_VI_MODE_COLOR="white"
 SPACESHIP_DIR_TRUNC=4
 SPACESHIP_DIR_TRUNC_REPO=false
 
 ZSH_THEME="spaceship"
 plugins=(
-  # archlinux
-#  nvm
   sprunge
   vi-mode
   zsh-syntax-highlighting
@@ -57,18 +55,24 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-autoload -Uz compinit
 
+autoload -Uz compinit
 # check cached dump once a day
 for dump in ~/.zcompdump(N.mh+24); do
    compinit
 done
 compinit -C
 
-source <(cat ~/.oh-my-zsh/custom/alias/common/*)
+source ~/.oh-my-zsh/custom/alias/common.zsh
 source ~/.oh-my-zsh/custom/alias/osx.zsh
+
+eval `dircolors ~/.dir_colors`
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
+fi
+
+if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
+    source /usr/bin/virtualenvwrapper.sh
 fi
 # zprof

@@ -1,4 +1,4 @@
-# zmodload zsh/zprof
+zmodload zsh/zprof
 # bindkey -v
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -48,7 +48,7 @@ SPACESHIP_DIR_TRUNC_REPO=false
 ZSH_THEME="spaceship"
 plugins=(
   archlinux
-  nvm
+  #nvm
   sprunge
   vi-mode
   zsh-syntax-highlighting
@@ -57,15 +57,16 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-autoload -Uz compinit
 
 # check cached dump once a day
+autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
-   compinit
+  compinit
 done
 compinit -C
 
-source <(cat ~/.oh-my-zsh/custom/alias/*)
+# source <(cat ~/.oh-my-zsh/custom/alias/*)
+source ~/.oh-my-zsh/custom/alias/common.zsh
 source ~/.oh-my-zsh/custom/alias/arch.zsh
 
 eval `dircolors ~/.dir_colors`
@@ -81,8 +82,6 @@ fi
 if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
     source /usr/bin/virtualenvwrapper.sh
 fi
-
-# zprof
 
 # Shell side configuration for vterm
 # https://github.com/akermu/emacs-libvterm#shell-side-configuration
@@ -102,3 +101,5 @@ vterm_printf(){
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
 fi
+
+#zprof
